@@ -21,6 +21,19 @@ window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[layer_names]
+
+2d_physics/layer_1="Terrain"
+3d_physics/layer_1="Terrain"
+2d_physics/layer_2="Player"
+3d_physics/layer_2="Player"
+2d_physics/layer_3="Enemies"
+3d_physics/layer_3="Enemies"
+2d_physics/layer_4="Objects"
+3d_physics/layer_4="Objects"
+2d_physics/layer_5="Projectiles"
+3d_physics/layer_5="Projectiles"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
@@ -28,3 +41,4 @@ window/stretch/aspect="expand"
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
