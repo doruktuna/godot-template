@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://cftl1iy03fmos"]
+
+[ext_resource type="Script" uid="uid://bl2ktdnl7ow47" path="res://globals/debug_overlay.gd" id="1_gbklx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d67f2"]
+
+[node name="DebugOverlay" type="CanvasLayer" unique_id=467306059]
+layer = 100
+script = ExtResource("1_gbklx")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1482748820]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1562654777]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1439792408]
+layout_mode = 2
+
+[node name="InfoLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=730695114]
+layout_mode = 2
+text = "INFO"
+
+[node name="InfoContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=249545016]
+layout_mode = 2
+columns = 2
+
+[node name="FPSLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/InfoContainer" unique_id=748756299]
+layout_mode = 2
+text = "FPS:"
+
+[node name="FPSValue" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/InfoContainer" unique_id=781142224]
+unique_name_in_owner = true
+layout_mode = 2
+text = "60"
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1800211688]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=889353129]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_d67f2")
+
+[node name="ActionsLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1690655077]
+layout_mode = 2
+text = "ACTIONS"
+
+[node name="RestartButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1008042747]
+unique_name_in_owner = true
+layout_mode = 2
+text = "RESTART"
+
+[node name="PreviousLevelButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1317810591]
+unique_name_in_owner = true
+layout_mode = 2
+text = "PREVIOUS LEVEL"
+
+[node name="NextLevelButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1018444951]
+unique_name_in_owner = true
+layout_mode = 2
+text = "NEXT LEVEL"
+
+[node name="QuitButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=687481803]
+unique_name_in_owner = true
+layout_mode = 2
+text = "QUIT"
