@@ -25,3 +25,7 @@
 ## ⅍ Naming Conventions
 1. snake_case for folders and files
 1. PascalCase for nodes
+
+## 🧑‍💻 Building & Exporting
+1. Don't forget to setup/change your export presets
+1. Done through: Project → Export 
