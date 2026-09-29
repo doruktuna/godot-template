@@ -1,1 +1,50 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128"><rect width="124" height="124" x="2" y="2" fill="#363d52" stroke="#212532" stroke-width="4" rx="14"/><g fill="#fff" transform="translate(12.322 12.322)scale(.101)"><path d="M105 673v33q407 354 814 0v-33z"/><path fill="#478cbf" d="m105 673 152 14q12 1 15 14l4 67 132 10 8-61q2-11 15-15h162q13 4 15 15l8 61 132-10 4-67q3-13 15-14l152-14V427q30-39 56-81-35-59-83-108-43 20-82 47-40-37-88-64 7-51 8-102-59-28-123-42-26 43-46 89-49-7-98 0-20-46-46-89-64 14-123 42 1 51 8 102-48 27-88 64-39-27-82-47-48 49-83 108 26 42 56 81zm0 33v39c0 276 813 276 814 0v-39l-134 12-5 69q-2 10-14 13l-162 11q-12 0-16-11l-10-65H446l-10 65q-4 11-16 11l-162-11q-12-3-14-13l-5-69z"/><path d="M483 600c0 34 58 34 58 0v-86c0-34-58-34-58 0z"/><circle cx="725" cy="526" r="90"/><circle cx="299" cy="526" r="90"/></g><g fill="#414042" transform="translate(12.322 12.322)scale(.101)"><circle cx="307" cy="532" r="60"/><circle cx="717" cy="532" r="60"/></g></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="800px"
+   height="800px"
+   viewBox="0 0 24 24"
+   fill="none"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="icon.svg"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#cbcbcb"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.725"
+     inkscape:cx="405.51724"
+     inkscape:cy="322.75862"
+     inkscape:window-width="2560"
+     inkscape:window-height="1371"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <circle
+     style="fill:#ffffff;stroke-width:0.29694"
+     id="path2"
+     cx="12"
+     cy="12"
+     r="12" />
+  <path
+     d="m 3.7985005,8.3060522 c 0,-0.6441456 0.1351119,-1.25673 0.3785442,-1.8109622 l 2.088652,2.0886519 c 0.6401133,0.6401133 1.6779402,0.6401133 2.3180535,0 0.6401133,-0.6401051 0.6401133,-1.677932 0,-2.3180453 L 6.4950983,4.1770447 C 7.0493304,3.9336123 7.6619149,3.7985005 8.3060522,3.7985005 c 2.4894798,0 4.5075518,2.0180964 4.5075518,4.5075517 0,0.6441373 -0.135144,1.2567218 -0.378552,1.8109538 l 7.291497,7.291514 c 0.640155,0.640155 0.640155,1.677957 0,2.318029 v 0 c -0.640072,0.640155 -1.677874,0.640155 -2.318029,0 l -7.291514,-7.291497 c -0.5542322,0.243408 -1.1668082,0.378552 -1.8109538,0.378552 -2.4894552,0 -4.5075517,-2.018072 -4.5075517,-4.5075518 z"
+     stroke="#000000"
+     stroke-width="1.63911"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path1" />
+</svg>

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bvcmylbm4efj1"]
 
 [ext_resource type="Script" uid="uid://c8bsavbb8654o" path="res://entities/player/player.gd" id="1_abrql"]
-[ext_resource type="Texture2D" uid="uid://dwdba0j101xbf" path="res://icon.svg" id="1_symyc"]
+[ext_resource type="Texture2D" uid="uid://cpp0wcvw5iruq" path="res://godot-icon.svg" id="2_abrql"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d67f2"]
 size = Vector2(130, 128)
@@ -12,7 +12,7 @@ collision_mask = 29
 script = ExtResource("1_abrql")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=217560675]
-texture = ExtResource("1_symyc")
+texture = ExtResource("2_abrql")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=696195505]
 shape = SubResource("RectangleShape2D_d67f2")
