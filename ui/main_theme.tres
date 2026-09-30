@@ -2,12 +2,27 @@
 
 [ext_resource type="FontFile" uid="uid://btlmri3nnejjg" path="res://assets/fonts/Roboto-VariableFont_wdth,wght.ttf" id="1_g1fjd"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g1fjd"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3xb56"]
 content_margin_left = 20.0
 content_margin_top = 10.0
 content_margin_right = 20.0
 content_margin_bottom = 10.0
 bg_color = Color(0.22, 0.22, 0.22, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g1fjd"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0.15686275, 0.15686275, 0.15686275, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -44,7 +59,7 @@ MainMenuButton/colors/font_hover_color = Color(0.7137255, 0.8, 0.9882353, 1)
 MainMenuButton/colors/font_pressed_color = Color(0.9882353, 0.9882353, 0.9882353, 1)
 MainMenuButton/font_sizes/font_size = 64
 MainMenuButton/fonts/font = ExtResource("1_g1fjd")
-MainMenuButton/styles/disabled = SubResource("StyleBoxFlat_g1fjd")
+MainMenuButton/styles/disabled = SubResource("StyleBoxFlat_3xb56")
 MainMenuButton/styles/focus = SubResource("StyleBoxFlat_g1fjd")
 MainMenuButton/styles/hover = SubResource("StyleBoxFlat_g1fjd")
 MainMenuButton/styles/normal = SubResource("StyleBoxFlat_d67f2")

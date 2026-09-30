@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c14p3tv3084fc"]
 
 [ext_resource type="Texture2D" uid="uid://dapex8y1dbqel" path="res://ui/menus/main_menu_bg.jpg" id="1_5oih7"]
+[ext_resource type="Script" uid="uid://clguv6p0vb1y1" path="res://ui/menus/main_menu.gd" id="1_qc8qn"]
 
 [node name="MainMenu" type="Control" unique_id=2131397708]
 layout_mode = 3
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_qc8qn")
 
 [node name="Background" type="TextureRect" parent="." unique_id=2015924802]
 layout_mode = 1
@@ -36,27 +38,33 @@ grow_vertical = 2
 theme_override_constants/separation = 20
 
 [node name="StartButton" type="Button" parent="VBoxContainer" unique_id=1616854908]
+unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"MainMenuButton"
 text = "START"
 
 [node name="ContinueButton" type="Button" parent="VBoxContainer" unique_id=2022503464]
+unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 theme_type_variation = &"MainMenuButton"
 disabled = true
 text = "CONTINUE"
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer" unique_id=1175780119]
+unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"MainMenuButton"
 text = "SETTINGS"
 
 [node name="CreditsButton" type="Button" parent="VBoxContainer" unique_id=1438221809]
+unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"MainMenuButton"
 text = "CREDITS"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=1900349890]
+unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"MainMenuButton"
 text = "QUIT"
