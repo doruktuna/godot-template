@@ -5,6 +5,9 @@ extends Node
 # Player Signals
 signal player_died
 
+# Scene management signals
+signal scene_change_requested(scene: SceneManager.Scene, params: Dictionary)
+
 # Level/Game signals
 signal quit_requested
 signal restart_requested
