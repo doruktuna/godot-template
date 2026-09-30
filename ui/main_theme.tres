@@ -66,3 +66,6 @@ MainMenuButton/styles/focus = SubResource("StyleBoxFlat_g1fjd")
 MainMenuButton/styles/hover = SubResource("StyleBoxFlat_g1fjd")
 MainMenuButton/styles/normal = SubResource("StyleBoxFlat_d67f2")
 MainMenuButton/styles/pressed = SubResource("StyleBoxFlat_6tukj")
+MenuLabel/base_type = &"Label"
+MenuLabel/font_sizes/font_size = 64
+MenuLabel/fonts/font = ExtResource("1_g1fjd")

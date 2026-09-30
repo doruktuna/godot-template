@@ -11,7 +11,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qc8qn")
-start_level_path = "uid://da3wyax0qgsew"
 
 [node name="Background" type="TextureRect" parent="." unique_id=2015924802]
 layout_mode = 1

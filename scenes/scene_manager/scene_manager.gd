@@ -10,10 +10,12 @@ extends Node
 @onready var loading_label: Label = $TransitionLayer/LoadingLabel
 @onready var animation_player: AnimationPlayer = $TransitionLayer/AnimationPlayer
 
-enum Scene {MAIN_MENU, LEVEL_1}
+enum Scene {MAIN_MENU, SETTINGS_MENU, CREDITS, LEVEL_1}
 
 const SCENES := {
 	Scene.MAIN_MENU: "uid://c14p3tv3084fc",
+	Scene.SETTINGS_MENU: "uid://bmn6dp2fgrq76",
+	Scene.CREDITS: "uid://c43wcx7i5vjej",
 	Scene.LEVEL_1: "uid://da3wyax0qgsew",
 }
 
@@ -56,7 +58,7 @@ func change_to_scene(scene: Scene, _params: Dictionary) -> void:
 	animation_player.play("fade_out")
 	await animation_player.animation_finished
 	transition_layer.hide()
-	
+
 	new_scene.process_mode = Node.PROCESS_MODE_ALWAYS
 
 	

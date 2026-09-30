@@ -11,11 +11,21 @@ extends Control
 func _ready() -> void:
 	start_button.grab_focus()
 	start_button.pressed.connect(_on_start_button_pressed)
+	settings_button.pressed.connect(_on_settings_button_pressed)
+	credits_button.pressed.connect(_on_credits_button_pressed)
 	quit_button.pressed.connect(_on_quit_button_pressed)
 
 
 func _on_start_button_pressed() -> void:
 	EventBus.scene_change_requested.emit(SceneManager.Scene.LEVEL_1, {})
+
+
+func _on_settings_button_pressed() -> void:
+	EventBus.scene_change_requested.emit(SceneManager.Scene.SETTINGS_MENU, {})
+
+
+func _on_credits_button_pressed() -> void:
+	EventBus.scene_change_requested.emit(SceneManager.Scene.CREDITS, {})
 
 
 func _on_quit_button_pressed() -> void:
