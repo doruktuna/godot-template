@@ -43,30 +43,31 @@ func _on_scene_change_request(scene: Scene, params: Dictionary) -> void:
 
 
 func change_to_scene(scene: Scene, _params: Dictionary) -> void:
+	get_tree().paused = true
+
 	# This starts loading the new scene into memory
 	ResourceLoader.load_threaded_request(SCENES[scene])
 
-	await setup_and_show_snapshot()
+	# Remove current scene and fade out to black
+	await capture_and_show_snapshot()
 	remove_current_scene()
+	await fade_out_animation()
 
-	animation_player.play("fade_in")
-	await animation_player.animation_finished
-	snapshot.hide()
-
+	# Add new scene and fade in from black
 	var new_scene := await add_new_scene(scene)
-
-	animation_player.play("fade_out")
-	await animation_player.animation_finished
-	transition_layer.hide()
-
-	new_scene.process_mode = Node.PROCESS_MODE_ALWAYS
+	var original_mode := new_scene.process_mode
+	new_scene.process_mode = Node.PROCESS_MODE_DISABLED
+	await fade_in_animation()
+	new_scene.process_mode = original_mode
+	
+	get_tree().paused = false
 
 	
-func setup_and_show_snapshot() -> void:
+func capture_and_show_snapshot() -> void:
 	# Wait the frame draw in order not to capture unfinished frames
 	await RenderingServer.frame_post_draw
 	var image := get_viewport().get_texture().get_image()
-	if image != null: # headless/dummy renderer
+	if image != null:
 		snapshot.texture = ImageTexture.create_from_image(image)
 		snapshot.show()
 
@@ -77,6 +78,19 @@ func setup_and_show_snapshot() -> void:
 func hide_overlay() -> void:
 	overlay.color.a = 0
 	loading_label.modulate.a = 0
+
+
+func fade_out_animation() -> void:
+	animation_player.play("fade_out")
+	await animation_player.animation_finished
+	snapshot.hide()
+	snapshot.texture = null
+
+
+func fade_in_animation() -> void:
+	animation_player.play("fade_in")
+	await animation_player.animation_finished
+	transition_layer.hide()
 
 
 func remove_current_scene() -> void:
@@ -94,7 +108,6 @@ func add_new_scene(scene: Scene) -> Node:
 	# Load and instantiate the scene
 	var packed := ResourceLoader.load_threaded_get(path) as PackedScene
 	var new_scene := packed.instantiate()
-	new_scene.process_mode = Node.PROCESS_MODE_DISABLED
 	scene_container.add_child(new_scene)
 
 	return new_scene
