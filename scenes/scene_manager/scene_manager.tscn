@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://vy1jieqyx5tv"]
+
+[ext_resource type="Script" uid="uid://bhrxof2w7pqt5" path="res://scenes/scene_manager/scene_manager.gd" id="1_hclo4"]
+[ext_resource type="PackedScene" uid="uid://c14p3tv3084fc" path="res://ui/menus/main_menu.tscn" id="2_yr2f4"]
+
+[sub_resource type="Animation" id="Animation_hclo4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Overlay:color:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LoadingLabel:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_yr2f4"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Overlay:color:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LoadingLabel:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pkci8"]
+_data = {
+&"RESET": SubResource("Animation_hclo4"),
+&"fade_out": SubResource("Animation_yr2f4")
+}
+
+[node name="SceneManager" type="Node" unique_id=161794751]
+script = ExtResource("1_hclo4")
+start_scene = ExtResource("2_yr2f4")
+
+[node name="SceneContainer" type="Node" parent="." unique_id=1331410767]
+
+[node name="PersistObjects" type="Node" parent="." unique_id=1164110594]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=506864412]
+
+[node name="TransitionLayer" type="CanvasLayer" parent="." unique_id=1712367609]
+process_mode = 3
+layer = 200
+
+[node name="Snapshot" type="TextureRect" parent="TransitionLayer" unique_id=635077517]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Overlay" type="ColorRect" parent="TransitionLayer" unique_id=180020664]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="LoadingLabel" type="Label" parent="TransitionLayer" unique_id=1309324453]
+anchors_preset = -1
+anchor_left = 0.95
+anchor_top = 0.98
+anchor_right = 0.98
+anchor_bottom = 0.98
+offset_left = -75.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 64
+text = "Loading..."
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TransitionLayer" unique_id=1060796119]
+libraries/ = SubResource("AnimationLibrary_pkci8")

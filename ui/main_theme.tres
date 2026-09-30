@@ -51,6 +51,8 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [resource]
+Label/font_sizes/font_size = 32
+Label/fonts/font = ExtResource("1_g1fjd")
 MainMenuButton/base_type = &"Button"
 MainMenuButton/colors/font_color = Color(0.36078432, 0.5568628, 0.99215686, 1)
 MainMenuButton/colors/font_disabled_color = Color(0.3168, 0.35581335, 0.44, 1)

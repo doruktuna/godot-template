@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="2D Project Template"
-run/main_scene="uid://c14p3tv3084fc"
+run/main_scene="uid://vy1jieqyx5tv"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
