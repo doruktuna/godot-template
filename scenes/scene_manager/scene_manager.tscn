@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bhrxof2w7pqt5" path="res://scenes/scene_manager/scene_manager.gd" id="1_hclo4"]
 [ext_resource type="PackedScene" uid="uid://c14p3tv3084fc" path="res://ui/menus/main_menu.tscn" id="2_yr2f4"]
+[ext_resource type="AudioStream" uid="uid://bj3t2g8s5d53j" path="res://assets/music/menu_music.wav" id="3_yr2f4"]
 
 [sub_resource type="Animation" id="Animation_hclo4"]
 length = 0.001
@@ -102,6 +103,10 @@ start_scene = ExtResource("2_yr2f4")
 [node name="PersistObjects" type="Node" parent="." unique_id=1164110594]
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=506864412]
+process_mode = 3
+stream = ExtResource("3_yr2f4")
+autoplay = true
+bus = &"Music"
 
 [node name="TransitionLayer" type="CanvasLayer" parent="." unique_id=1712367609]
 process_mode = 3

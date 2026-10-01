@@ -2,6 +2,33 @@
 
 [ext_resource type="FontFile" uid="uid://btlmri3nnejjg" path="res://assets/fonts/Roboto-VariableFont_wdth,wght.ttf" id="1_g1fjd"]
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_d67f2"]
+color = Color(1, 1, 1, 1)
+thickness = 2
+
+[sub_resource type="DPITexture" id="DPITexture_g1fjd"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"7\" fill=\"#fefefe\"/></svg>
+"
+base_scale = 1.5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d67f2"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_top = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jwcag"]
+bg_color = Color(1, 1, 1, 0.11372549)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_top = 8.0
+expand_margin_bottom = 8.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3xb56"]
 content_margin_left = 20.0
 content_margin_top = 10.0
@@ -28,7 +55,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d67f2"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8tj4x"]
 content_margin_left = 20.0
 content_margin_top = 10.0
 content_margin_right = 20.0
@@ -171,6 +198,12 @@ border_width_right = 2
 border_width_bottom = 2
 
 [resource]
+HSeparator/styles/separator = SubResource("StyleBoxLine_d67f2")
+HSlider/icons/grabber = SubResource("DPITexture_g1fjd")
+HSlider/icons/grabber_highlight = SubResource("DPITexture_g1fjd")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_d67f2")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_d67f2")
+HSlider/styles/slider = SubResource("StyleBoxFlat_jwcag")
 Label/font_sizes/font_size = 32
 Label/fonts/font = ExtResource("1_g1fjd")
 MainMenuButton/base_type = &"Button"
@@ -184,7 +217,7 @@ MainMenuButton/fonts/font = ExtResource("1_g1fjd")
 MainMenuButton/styles/disabled = SubResource("StyleBoxFlat_3xb56")
 MainMenuButton/styles/focus = SubResource("StyleBoxFlat_g1fjd")
 MainMenuButton/styles/hover = SubResource("StyleBoxFlat_g1fjd")
-MainMenuButton/styles/normal = SubResource("StyleBoxFlat_d67f2")
+MainMenuButton/styles/normal = SubResource("StyleBoxFlat_8tj4x")
 MainMenuButton/styles/pressed = SubResource("StyleBoxFlat_6tukj")
 MenuConfirmButton/base_type = &"Button"
 MenuConfirmButton/font_sizes/font_size = 48

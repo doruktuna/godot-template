@@ -2,11 +2,15 @@
 
 [ext_resource type="Texture2D" uid="uid://dapex8y1dbqel" path="res://ui/menus/main_menu_bg.jpg" id="1_8e7dj"]
 [ext_resource type="Script" uid="uid://bsb6rqxk3qkcu" path="res://ui/menus/settings_menu.gd" id="1_86yk5"]
+[ext_resource type="Texture2D" uid="uid://ccxt8cgifijw3" path="res://ui/menus/icons/screen.svg" id="3_o40hf"]
+[ext_resource type="Texture2D" uid="uid://0e1khqd1ukmw" path="res://ui/menus/icons/audio.svg" id="4_txkl1"]
+[ext_resource type="Texture2D" uid="uid://53snj2aapai3" path="res://ui/menus/icons/gamepad.svg" id="5_qsjx8"]
+[ext_resource type="Texture2D" uid="uid://cg3pjqxds8fg2" path="res://ui/menus/icons/sound-on.svg" id="6_qsjx8"]
+[ext_resource type="Texture2D" uid="uid://h1dbhb8u2dgd" path="res://ui/menus/icons/sound-off.svg" id="7_122vd"]
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_hs8vu"]
-color = Color(1, 1, 1, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d67f2"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d67f2"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6tukj"]
 
 [node name="SettingsMenu" type="Control" unique_id=783201810]
 layout_mode = 3
@@ -28,54 +32,184 @@ texture = ExtResource("1_8e7dj")
 expand_mode = 3
 
 [node name="Panel" type="Panel" parent="." unique_id=2055635965]
-custom_minimum_size = Vector2(500, 500)
+custom_minimum_size = Vector2(1000, 500)
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.05
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1379858527]
-layout_mode = 0
-offset_top = 20.0
-offset_right = 500.0
-offset_bottom = 480.0
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=455338830]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 20
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer" unique_id=1832589663]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=1379858527]
 layout_mode = 2
-theme_type_variation = &"MenuLabel"
-text = "SETTINGS"
-horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer" unique_id=872164524]
-layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxLine_hs8vu")
-
-[node name="HSeparator2" type="HSeparator" parent="Panel/VBoxContainer" unique_id=280929638]
+[node name="TabContainer" type="TabContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1955162406]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/separator = SubResource("StyleBoxFlat_d67f2")
+theme_override_constants/icon_max_width = 100
+tab_alignment = 1
+current_tab = 1
+tab_0/icon = ExtResource("3_o40hf")
+tab_1/icon = ExtResource("4_txkl1")
+tab_2/icon = ExtResource("5_qsjx8")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=682988491]
+[node name="Video" type="Control" parent="Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=1166475291]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+metadata/_tab_name = ""
+
+[node name="Label2" type="Label" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Video" unique_id=2015261476]
+layout_mode = 0
+offset_top = 31.0
+offset_right = 204.0
+offset_bottom = 69.0
+text = "Video settings"
+
+[node name="Audio" type="Control" parent="Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=221997999]
+layout_mode = 2
+metadata/_tab_index = 1
+metadata/_tab_name = ""
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Audio" unique_id=1517315545]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.02
+anchor_right = 0.98
+anchor_bottom = 0.98
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Audio/VBoxContainer" unique_id=605728478]
+layout_mode = 2
+theme_type_variation = &"MenuLabel"
+text = "AUDIO"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Audio/VBoxContainer" unique_id=319145180]
 layout_mode = 2
 
-[node name="DiscardButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer" unique_id=501662072]
+[node name="HSeparator2" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Audio/VBoxContainer" unique_id=1286874367]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_d67f2")
+
+[node name="GridContainer" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Audio/VBoxContainer" unique_id=1339841512]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Audio/VBoxContainer/GridContainer" unique_id=1746030001]
+layout_mode = 2
+text = "SFX"
+horizontal_alignment = 2
+
+[node name="SFXSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Audio/VBoxContainer/GridContainer" unique_id=215112784]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+max_value = 2.0
+step = 0.01
+value = 1.0
+
+[node name="Label2" type="Label" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Audio/VBoxContainer/GridContainer" unique_id=345551601]
+layout_mode = 2
+text = "Music"
+horizontal_alignment = 2
+
+[node name="MusicSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Audio/VBoxContainer/GridContainer" unique_id=1055260591]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+max_value = 2.0
+step = 0.01
+value = 1.0
+
+[node name="Label3" type="Label" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Audio/VBoxContainer/GridContainer" unique_id=1920520548]
+layout_mode = 2
+text = "Master"
+horizontal_alignment = 2
+
+[node name="MasterSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Audio/VBoxContainer/GridContainer" unique_id=2104681866]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+max_value = 2.0
+step = 0.01
+value = 1.0
+
+[node name="Label4" type="Label" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Audio/VBoxContainer/GridContainer" unique_id=637560150]
+layout_mode = 2
+text = "Mute"
+horizontal_alignment = 2
+
+[node name="MuteToggleButton" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Audio/VBoxContainer/GridContainer" unique_id=828265464]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 60)
+custom_maximum_size = Vector2(60, 60)
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("6_qsjx8")
+texture_pressed = ExtResource("7_122vd")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Inputs" type="Control" parent="Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=1253745391]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+metadata/_tab_name = ""
+
+[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer" unique_id=872164524]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_6tukj")
+
+[node name="ConfirmButtons" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=682988491]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="DiscardButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/ConfirmButtons" unique_id=501662072]
 unique_name_in_owner = true
 layout_mode = 2
-theme_type_variation = &"MainMenuButton"
+theme_type_variation = &"MenuRejectButton"
 text = "DISCARD"
 
-[node name="SaveButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer" unique_id=1274173073]
+[node name="SaveButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/ConfirmButtons" unique_id=1274173073]
 unique_name_in_owner = true
 layout_mode = 2
-theme_type_variation = &"MainMenuButton"
+theme_type_variation = &"MenuConfirmButton"
 text = "SAVE"
+
+[node name="SettingsLabel" type="Label" parent="." unique_id=1832589663]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.98
+anchor_top = 0.98
+anchor_right = 0.98
+anchor_bottom = 0.98
+offset_left = -500.0
+offset_top = -76.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_type_variation = &"MenuLabel"
+text = "SETTINGS"
+horizontal_alignment = 2
