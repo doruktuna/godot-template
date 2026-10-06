@@ -10,6 +10,8 @@ extends Control
 @onready var resolution_scale_slider: HSlider = %ResolutionScaleSlider
 @onready var resolution_scale_label: Label = %ResolutionScaleLabel
 @onready var resolution_value: Label = %ResolutionValue
+@onready var vsync_option_button: OptionButton = %VsyncOptionButton
+@onready var screen_shake_check_box: CheckBox = %ScreenShakeCheckBox
 
 # Audio settings
 @onready var audio_defaults_button: Button = %AudioDefaultsButton
@@ -25,9 +27,12 @@ func _ready() -> void:
 	save_button.pressed.connect(_on_save_pressed)
 
 	# Video input signals
+	video_defaults_button.pressed.connect(_return_video_to_defaults)
 	fullscreen_check_box.toggled.connect(_on_fullscreen_check_box_toggled)
 	resolution_scale_slider.value_changed.connect(_on_resolution_scale_slider_value_changed)
 	resolution_scale_slider.drag_ended.connect(_on_resolution_scale_slider_drag_ended)
+	vsync_option_button.item_selected.connect(_on_vsync_option_button_item_selected)
+	screen_shake_check_box.toggled.connect(_on_screen_shake_check_box_toggled)
 
 	# Audio input signals
 	audio_defaults_button.pressed.connect(_return_audio_to_defaults)
@@ -72,11 +77,18 @@ func _update_audio_ui_from_settings() -> void:
 func _update_video_ui_from_settings() -> void:
 	resolution_scale_slider.value = SettingsManager.get_setting("video", "resolution_scale")
 	fullscreen_check_box.button_pressed = SettingsManager.get_setting("video", "fullscreen")
+	vsync_option_button.selected = SettingsManager.get_setting("video", "vsync")
+	screen_shake_check_box.button_pressed = SettingsManager.get_setting("video", "screen_shake")
 	
 	
 func _return_audio_to_defaults() -> void:
 	SettingsManager.reset_to_defaults_for_a_section("audio")
 	_update_audio_ui_from_settings()
+
+
+func _return_video_to_defaults() -> void:
+	SettingsManager.reset_to_defaults_for_a_section("video")
+	_update_video_ui_from_settings()
 
 
 func _on_sfx_slider_value_changed(slider_value: float) -> void:
@@ -116,6 +128,15 @@ func _on_resolution_scale_slider_value_changed(value: float) -> void:
 func _on_resolution_scale_slider_drag_ended(value_changed: bool) -> void:
 	if value_changed:
 		SettingsManager.set_setting("video", "resolution_scale", resolution_scale_slider.value)
+
+
+func _on_vsync_option_button_item_selected(index: int) -> void:
+	# This directly works since the option button follows the order of vsync_modes enum
+	SettingsManager.set_setting("video", "vsync", index)
+
+
+func _on_screen_shake_check_box_toggled(toggled_on: bool) -> void:
+	SettingsManager.set_setting("video", "screen_shake", toggled_on)
 
 
 func set_bus_volume(bus_name: String, linear_value: float) -> void:

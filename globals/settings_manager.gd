@@ -8,6 +8,8 @@ const ASPECT_RATIO := 16.0 / 9.0
 const WIDTH_STEP := 16
 const TITLE_BAR_MARGIN := 48
 
+enum vsync_modes {DISABLED = 0, ENABLED, ADAPTIVE}
+
 const DEFAULTS := {
 	"audio": {
 		"master": 1.0,
@@ -17,8 +19,9 @@ const DEFAULTS := {
 	},
 	"video": {
 		"fullscreen": false,
-		"resolution_scale": 0.5,
-		"vsync": true,
+		"resolution_scale": 0.75,
+		"vsync": vsync_modes.DISABLED,
+		"screen_shake": true,
 	},
 }
 
@@ -131,9 +134,15 @@ func _apply(section: String, key: String, value: Variant) -> void:
 			_apply_resolution_scale(value)
 
 		["video", "vsync"]:
-			DisplayServer.window_set_vsync_mode(
-				DisplayServer.VSYNC_ENABLED if value else DisplayServer.VSYNC_DISABLED
-			)
+			match value:
+				vsync_modes.DISABLED:
+					DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+				vsync_modes.ENABLED:
+					DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+				vsync_modes.ADAPTIVE:
+					DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ADAPTIVE)
+				_:
+					push_error("Unknown vsync mode: ", value)
 
 
 func _set_bus_volume(bus_name: String, linear: float) -> void:

@@ -232,6 +232,34 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0acqk"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efp5j"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
 [resource]
 CheckBox/icons/checked = SubResource("DPITexture_6tukj")
 CheckBox/icons/unchecked = SubResource("DPITexture_3xb56")
@@ -282,3 +310,7 @@ MenuRejectButton/styles/focus = SubResource("StyleBoxFlat_gjt7e")
 MenuRejectButton/styles/hover = SubResource("StyleBoxFlat_14qxj")
 MenuRejectButton/styles/normal = SubResource("StyleBoxFlat_r8m6n")
 MenuRejectButton/styles/pressed = SubResource("StyleBoxFlat_hf1n1")
+OptionButton/font_sizes/font_size = 24
+OptionButton/styles/focus = SubResource("StyleBoxFlat_0acqk")
+OptionButton/styles/hover = SubResource("StyleBoxFlat_0acqk")
+OptionButton/styles/normal = SubResource("StyleBoxFlat_efp5j")
