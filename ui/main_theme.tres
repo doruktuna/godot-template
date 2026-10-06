@@ -2,6 +2,27 @@
 
 [ext_resource type="FontFile" uid="uid://btlmri3nnejjg" path="res://assets/fonts/Roboto-VariableFont_wdth,wght.ttf" id="1_g1fjd"]
 
+[sub_resource type="DPITexture" id="DPITexture_6tukj"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><rect width=\"14\" height=\"14\" x=\"1\" y=\"1\" fill=\"#fff\" fill-opacity=\".75\" rx=\"2.333\"/><path fill=\"#1a1a1a\" d=\"m11.5 3.75-5.6 5.6-1.7-1.7-1.5 1.5 3.2 3.2 7.1-7.1z\"/></svg>
+"
+base_scale = 3.0
+
+[sub_resource type="DPITexture" id="DPITexture_3xb56"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><rect width=\"14\" height=\"14\" x=\"1\" y=\"1\" fill=\"#1a1a1a\" fill-opacity=\".5\" rx=\"2.333\"/></svg>
+"
+base_scale = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g1fjd"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_d67f2"]
 color = Color(1, 1, 1, 1)
 thickness = 2
@@ -11,8 +32,22 @@ _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\">
 "
 base_scale = 1.5
 
+[sub_resource type="DPITexture" id="DPITexture_joxlk"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"7\" fill=\"#fefefe\" fill-opacity=\".37\"/></svg>
+"
+base_scale = 1.5
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d67f2"]
 bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_top = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xw7tv"]
+bg_color = Color(0.47713065, 0.30067602, 0.62293595, 1)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
@@ -40,7 +75,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g1fjd"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5d22w"]
 content_margin_left = 20.0
 content_margin_top = 10.0
 content_margin_right = 20.0
@@ -198,11 +233,15 @@ border_width_right = 2
 border_width_bottom = 2
 
 [resource]
+CheckBox/icons/checked = SubResource("DPITexture_6tukj")
+CheckBox/icons/unchecked = SubResource("DPITexture_3xb56")
+CheckBox/styles/focus = SubResource("StyleBoxFlat_g1fjd")
 HSeparator/styles/separator = SubResource("StyleBoxLine_d67f2")
 HSlider/icons/grabber = SubResource("DPITexture_g1fjd")
+HSlider/icons/grabber_disabled = SubResource("DPITexture_joxlk")
 HSlider/icons/grabber_highlight = SubResource("DPITexture_g1fjd")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_d67f2")
-HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_d67f2")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_xw7tv")
 HSlider/styles/slider = SubResource("StyleBoxFlat_jwcag")
 Label/font_sizes/font_size = 32
 Label/fonts/font = ExtResource("1_g1fjd")
@@ -215,8 +254,8 @@ MainMenuButton/colors/font_pressed_color = Color(0.9882353, 0.9882353, 0.9882353
 MainMenuButton/font_sizes/font_size = 64
 MainMenuButton/fonts/font = ExtResource("1_g1fjd")
 MainMenuButton/styles/disabled = SubResource("StyleBoxFlat_3xb56")
-MainMenuButton/styles/focus = SubResource("StyleBoxFlat_g1fjd")
-MainMenuButton/styles/hover = SubResource("StyleBoxFlat_g1fjd")
+MainMenuButton/styles/focus = SubResource("StyleBoxFlat_5d22w")
+MainMenuButton/styles/hover = SubResource("StyleBoxFlat_5d22w")
 MainMenuButton/styles/normal = SubResource("StyleBoxFlat_8tj4x")
 MainMenuButton/styles/pressed = SubResource("StyleBoxFlat_6tukj")
 MenuConfirmButton/base_type = &"Button"

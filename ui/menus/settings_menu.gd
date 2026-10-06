@@ -3,6 +3,15 @@ extends Control
 
 @onready var discard_button: Button = %DiscardButton
 @onready var save_button: Button = %SaveButton
+
+# Video settings
+@onready var video_defaults_button: Button = %VideoDefaultsButton
+@onready var fullscreen_check_box: CheckBox = %FullscreenCheckBox
+@onready var resolution_scale_slider: HSlider = %ResolutionScaleSlider
+@onready var resolution_scale_label: Label = %ResolutionScaleLabel
+@onready var resolution_value: Label = %ResolutionValue
+
+# Audio settings
 @onready var audio_defaults_button: Button = %AudioDefaultsButton
 @onready var sfx_slider: HSlider = %SFXSlider
 @onready var music_slider: HSlider = %MusicSlider
@@ -14,18 +23,29 @@ func _ready() -> void:
 	discard_button.grab_focus()
 	discard_button.pressed.connect(_on_discard_pressed)
 	save_button.pressed.connect(_on_save_pressed)
-	audio_defaults_button.pressed.connect(_return_audio_to_defaults)
 
+	# Video input signals
+	fullscreen_check_box.toggled.connect(_on_fullscreen_check_box_toggled)
+	resolution_scale_slider.value_changed.connect(_on_resolution_scale_slider_value_changed)
+	resolution_scale_slider.drag_ended.connect(_on_resolution_scale_slider_drag_ended)
+
+	# Audio input signals
+	audio_defaults_button.pressed.connect(_return_audio_to_defaults)
 	sfx_slider.value_changed.connect(_on_sfx_slider_value_changed)
 	music_slider.value_changed.connect(_on_music_slider_value_changed)
 	master_slider.value_changed.connect(_on_master_slider_value_changed)
 	mute_toggle_button.pressed.connect(_on_mute_toggle_button_pressed)
 
-	# Set slider values from the actual values
+	# Set input values from the actual values
 	_update_audio_ui_from_settings()
+	_update_video_ui_from_settings()
+
+	# Start editing (this is important to restore values if the settings are discarded)
+	SettingsManager.start_editing_settings()
 
 
 func _on_discard_pressed() -> void:
+	SettingsManager.cancel_editing_settings()
 	EventBus.scene_change_requested.emit(SceneManager.Scene.MAIN_MENU, {})
 
 
@@ -49,6 +69,11 @@ func _update_audio_ui_from_settings() -> void:
 	mute_toggle_button.button_pressed = SettingsManager.get_setting("audio", "is_muted")
 
 
+func _update_video_ui_from_settings() -> void:
+	resolution_scale_slider.value = SettingsManager.get_setting("video", "resolution_scale")
+	fullscreen_check_box.button_pressed = SettingsManager.get_setting("video", "fullscreen")
+	
+	
 func _return_audio_to_defaults() -> void:
 	SettingsManager.reset_to_defaults_for_a_section("audio")
 	_update_audio_ui_from_settings()
@@ -71,10 +96,32 @@ func _on_mute_toggle_button_pressed() -> void:
 	AudioServer.set_bus_mute(bus_index, mute_toggle_button.button_pressed)
 
 
+func _on_fullscreen_check_box_toggled(toggled_on: bool) -> void:
+	SettingsManager.set_setting("video", "fullscreen", toggled_on)
+	resolution_scale_slider.editable = not toggled_on
+	if toggled_on:
+		resolution_scale_label.modulate = Color.GRAY
+		resolution_value.text = "(fullscreen)"
+	else:
+		resolution_scale_label.modulate = Color.WHITE
+		_on_resolution_scale_slider_value_changed(resolution_scale_slider.value)
+		_on_resolution_scale_slider_drag_ended(true)
+
+
+func _on_resolution_scale_slider_value_changed(value: float) -> void:
+	var res = SettingsManager.calculate_resolution_from_scale(value)
+	resolution_value.text = "({res_scale} → {res_width} * {res_height})".format({"res_scale": "%0.2f" % value, "res_width": res.x, "res_height": res.y})
+	
+
+func _on_resolution_scale_slider_drag_ended(value_changed: bool) -> void:
+	if value_changed:
+		SettingsManager.set_setting("video", "resolution_scale", resolution_scale_slider.value)
+
+
 func set_bus_volume(bus_name: String, linear_value: float) -> void:
 	var bus_index = AudioServer.get_bus_index(bus_name)
 	AudioServer.set_bus_volume_db(bus_index, linear_to_db(linear_value))
 
 
-func set_slider_value(slider: HSlider, db_value: float) -> void:
+func set_audio_slider_value(slider: HSlider, db_value: float) -> void:
 	slider.value = db_to_linear(db_value)
