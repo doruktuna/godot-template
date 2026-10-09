@@ -27,9 +27,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_pressed() and is_controller_type_match(event):
 		print("Pressed: ", event)
 		button_pressed = false
-		release_focus()
-		change_input_requested.emit(self, event)
 		text = old_text
+		change_input_requested.emit(self, event)
 
 
 func is_controller_type_match(event: InputEvent) -> bool:

@@ -40,11 +40,11 @@ func _ready() -> void:
 	var err := _config.load(PATH)
 	if err != OK and err != ERR_FILE_NOT_FOUND:
 		push_warning("Could not read settings (error: %d), using defaults." % err)
-	set_inputs_in_defaults()
+	_set_inputs_in_defaults()
 	apply_all()
 
 
-func set_inputs_in_defaults() -> void:
+func _set_inputs_in_defaults() -> void:
 	# Set empty arrays
 	for input_type in ["keyboard_inputs", "mouse_inputs", "joypad_button_inputs", "joypad_motion_inputs"]:
 		for action in INPUT_ACTIONS:
@@ -76,9 +76,18 @@ func get_setting(section: String, key: String) -> Variant:
 
 
 func set_setting(section: String, key: String, value: Variant) -> void:
-	_config.set_value(section, key, value)
-	_apply(section, key, value)
-	setting_changed.emit(section, key, value)
+	var new_value = value
+	if value is Array:
+		new_value = value.duplicate(true)
+	_config.set_value(section, key, new_value)
+	_apply(section, key, new_value)
+	setting_changed.emit(section, key, new_value)
+
+
+func set_input_change(section: String, action: String, action_ind: int, value: Variant) -> void:
+	var new_value: Variant = get_setting(section, action).duplicate(true)
+	new_value[action_ind] = value
+	set_setting(section, action, new_value)
 
 
 func save_settings() -> void:
@@ -110,9 +119,10 @@ func reset_to_defaults() -> void:
 
 func reset_to_defaults_for_a_section(section: String) -> void:
 	for key: String in DEFAULTS[section]:
+		print(section, ", ", key, ", ", DEFAULTS[section][key])
 		set_setting(section, key, DEFAULTS[section][key])
 
-
+	
 func apply_all() -> void:
 	for section: String in DEFAULTS:
 		for key: String in DEFAULTS[section]:
@@ -176,9 +186,25 @@ func _apply(section: String, key: String, value: Variant) -> void:
 				_:
 					push_error("Unknown vsync mode: ", value)
 
+		["keyboard_inputs", var action]:
+			_set_keyboard_inputs(action, value)
 
+	
 func _set_bus_volume(bus_name: String, linear: float) -> void:
 	var idx := AudioServer.get_bus_index(bus_name)
 	if idx == -1:
 		return
 	AudioServer.set_bus_volume_db(idx, linear_to_db(linear))
+
+
+func _set_keyboard_inputs(action: String, value: Variant) -> void:
+	# Clear events
+	for event in InputMap.action_get_events(action):
+		if event is InputEventKey:
+			InputMap.action_erase_event(action, event)
+
+	# Add events from array
+	for physical_keycode in value:
+		var event := InputEventKey.new()
+		event.physical_keycode = physical_keycode
+		InputMap.action_add_event(action, event)
