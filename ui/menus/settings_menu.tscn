@@ -4,9 +4,11 @@
 [ext_resource type="Script" uid="uid://bsb6rqxk3qkcu" path="res://ui/menus/settings_menu.gd" id="1_86yk5"]
 [ext_resource type="Texture2D" uid="uid://ccxt8cgifijw3" path="res://ui/menus/icons/screen.svg" id="3_o40hf"]
 [ext_resource type="Texture2D" uid="uid://0e1khqd1ukmw" path="res://ui/menus/icons/audio.svg" id="4_txkl1"]
+[ext_resource type="Texture2D" uid="uid://dr324rawpingn" path="res://ui/menus/icons/keyboard.svg" id="5_122vd"]
 [ext_resource type="Texture2D" uid="uid://53snj2aapai3" path="res://ui/menus/icons/gamepad.svg" id="5_qsjx8"]
 [ext_resource type="Texture2D" uid="uid://cg3pjqxds8fg2" path="res://ui/menus/icons/sound-on.svg" id="6_qsjx8"]
 [ext_resource type="Texture2D" uid="uid://h1dbhb8u2dgd" path="res://ui/menus/icons/sound-off.svg" id="7_122vd"]
+[ext_resource type="PackedScene" uid="uid://bd2c7fiqpdeva" path="res://ui/components/input_key_button.tscn" id="9_jwcag"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d67f2"]
 
@@ -62,12 +64,14 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/icon_max_width = 100
 tab_alignment = 1
-current_tab = 0
+current_tab = 2
 tab_0/icon = ExtResource("3_o40hf")
 tab_1/icon = ExtResource("4_txkl1")
-tab_2/icon = ExtResource("5_qsjx8")
+tab_2/icon = ExtResource("5_122vd")
+tab_3/icon = ExtResource("5_qsjx8")
 
 [node name="Video" type="Control" parent="Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=1166475291]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 metadata/_tab_name = ""
@@ -283,10 +287,85 @@ layout_mode = 2
 theme_type_variation = &"MenuIgnoreButton"
 text = "Reset to Defaults"
 
-[node name="Inputs" type="Control" parent="Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=1253745391]
-visible = false
+[node name="Keyboard" type="Control" parent="Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=1471059852]
 layout_mode = 2
 metadata/_tab_index = 2
+metadata/_tab_name = ""
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Keyboard" unique_id=1352394515]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.02
+anchor_right = 0.98
+anchor_bottom = 0.98
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Keyboard/VBoxContainer" unique_id=338748699]
+layout_mode = 2
+theme_type_variation = &"MenuLabel"
+text = "KEYBOARD"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Keyboard/VBoxContainer" unique_id=890031498]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Keyboard/VBoxContainer" unique_id=924211799]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_d67f2")
+
+[node name="KeyboardInputsContainer" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Keyboard/VBoxContainer" unique_id=1264917196]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Keyboard/VBoxContainer/KeyboardInputsContainer" unique_id=1362864928]
+layout_mode = 2
+text = "Left"
+horizontal_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Keyboard/VBoxContainer/KeyboardInputsContainer" unique_id=1526730461]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="LeftButton1" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Keyboard/VBoxContainer/KeyboardInputsContainer/HBoxContainer" unique_id=1668651101 instance=ExtResource("9_jwcag")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LeftButton2" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Keyboard/VBoxContainer/KeyboardInputsContainer/HBoxContainer" unique_id=2025981201 instance=ExtResource("9_jwcag")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Keyboard/VBoxContainer/KeyboardInputsContainer" unique_id=754671917]
+layout_mode = 2
+text = "Will be 
+filled 
+with code"
+horizontal_alignment = 2
+
+[node name="HSeparator3" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Keyboard/VBoxContainer" unique_id=481971310]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_d67f2")
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Keyboard/VBoxContainer" unique_id=402655838]
+layout_mode = 2
+
+[node name="KeyboardDefaultsButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Keyboard/VBoxContainer/CenterContainer" unique_id=448136108]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"MenuIgnoreButton"
+text = "Reset to Defaults"
+
+[node name="Gamepad" type="Control" parent="Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=1253745391]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
 metadata/_tab_name = ""
 
 [node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer" unique_id=872164524]

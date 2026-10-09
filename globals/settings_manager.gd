@@ -10,7 +10,7 @@ const TITLE_BAR_MARGIN := 48
 
 enum vsync_modes {DISABLED = 0, ENABLED, ADAPTIVE}
 
-const DEFAULTS := {
+var DEFAULTS := {
 	"audio": {
 		"master": 1.0,
 		"music": 1.0,
@@ -23,7 +23,13 @@ const DEFAULTS := {
 		"vsync": vsync_modes.DISABLED,
 		"screen_shake": true,
 	},
+	"keyboard_inputs": {},
+	"mouse_inputs": {},
+	"joypad_button_inputs": {},
+	"joypad_motion_inputs": {},
 }
+
+const INPUT_ACTIONS = ["up", "down", "left", "right", "action"]
 
 # Use old config to restore values when value changes are discarded
 var _config := ConfigFile.new()
@@ -34,9 +40,33 @@ func _ready() -> void:
 	var err := _config.load(PATH)
 	if err != OK and err != ERR_FILE_NOT_FOUND:
 		push_warning("Could not read settings (error: %d), using defaults." % err)
+	set_inputs_in_defaults()
 	apply_all()
-	
-		
+
+
+func set_inputs_in_defaults() -> void:
+	# Set empty arrays
+	for input_type in ["keyboard_inputs", "mouse_inputs", "joypad_button_inputs", "joypad_motion_inputs"]:
+		for action in INPUT_ACTIONS:
+			DEFAULTS[input_type][action] = []
+
+	# For each action, read all InputEvents and set the arrays accordingly
+	for action in INPUT_ACTIONS:
+		for event in InputMap.action_get_events(action):
+			if event is InputEventKey:
+				DEFAULTS["keyboard_inputs"][action].append(event.physical_keycode)
+			elif event is InputEventMouseButton:
+				DEFAULTS["mouse_inputs"][action].append(event.button_index)
+			elif event is InputEventJoypadButton:
+				DEFAULTS["joypad_button_inputs"][action].append(event.button_index)
+			elif event is InputEventJoypadMotion:
+				DEFAULTS["joypad_motion_inputs"][action].append([event.axis, event.axis_value])
+			else:
+				push_error("Unknown event type: ", action, ", ", event)
+
+	print(JSON.stringify(DEFAULTS, "  "))
+
+
 func get_setting(section: String, key: String) -> Variant:
 	var default: Variant = DEFAULTS[section][key]
 	var value: Variant = _config.get_value(section, key, default)
@@ -95,6 +125,8 @@ func _apply_resolution_scale(window_scale: float) -> void:
 
 	var size = calculate_resolution_from_scale(window_scale)
 	window.size = size
+
+	@warning_ignore("integer_division")
 	window.position = area.position + (area.size - size) / 2
 
 

@@ -20,6 +20,14 @@ extends Control
 @onready var master_slider: HSlider = %MasterSlider
 @onready var mute_toggle_button: TextureButton = %MuteToggleButton
 
+# Keyboard Input Map settings
+@onready var keyboard_defaults_button: Button = %KeyboardDefaultsButton
+@onready var keyboard_inputs_container: GridContainer = %KeyboardInputsContainer
+
+const INPUT_KEY_BUTTON_SCENE: PackedScene = preload("res://ui/components/input_key_button.tscn")
+
+const INPUT_ACTION_NAMES: Array[String] = ["up", "down", "left", "right", "action"]
+
 
 func _ready() -> void:
 	discard_button.grab_focus()
@@ -44,9 +52,15 @@ func _ready() -> void:
 	# Set input values from the actual values
 	_update_audio_ui_from_settings()
 	_update_video_ui_from_settings()
+	_update_keyboard_ui_from_settings()
 
 	# Start editing (this is important to restore values if the settings are discarded)
 	SettingsManager.start_editing_settings()
+
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("down"):
+		print("DOWN PRESSED")
 
 
 func _on_discard_pressed() -> void:
@@ -146,3 +160,38 @@ func set_bus_volume(bus_name: String, linear_value: float) -> void:
 
 func set_audio_slider_value(slider: HSlider, db_value: float) -> void:
 	slider.value = db_to_linear(db_value)
+
+
+func _update_keyboard_ui_from_settings() -> void:
+	var count = 0
+
+	for child in keyboard_inputs_container.get_children():
+		child.queue_free()
+
+	for action_name in INPUT_ACTION_NAMES:
+		var label := Label.new()
+		label.text = action_name.capitalize()
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		keyboard_inputs_container.add_child(label)
+
+		var keys_container := HBoxContainer.new()
+		keys_container.add_theme_constant_override("separation", 30)
+		keyboard_inputs_container.add_child(keys_container)
+		
+		var physical_keycodes: Array = SettingsManager.get_setting("keyboard_inputs", action_name)
+		for i in physical_keycodes.size():
+			var physical_keycode = physical_keycodes[i]
+			var keycode := DisplayServer.keyboard_get_keycode_from_physical(physical_keycode)
+			var ikb: InputKeyButton = INPUT_KEY_BUTTON_SCENE.instantiate()
+			ikb.text = OS.get_keycode_string(keycode)
+			ikb.controller_type = InputKeyButton.ControllerType.KEYBOARD
+			ikb.action = action_name
+			ikb.action_ind = i
+			ikb.change_input_requested.connect(_on_change_input_requested)
+			keys_container.add_child(ikb)
+
+
+func _on_change_input_requested(input_key_button: InputKeyButton, new_event: InputEvent) -> void:
+	print("Change Input Requested")
+	print(input_key_button)
+	print(new_event)

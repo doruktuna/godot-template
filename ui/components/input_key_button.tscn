@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bd2c7fiqpdeva"]
+
+[ext_resource type="Script" uid="uid://tpbu6owg152b" path="res://ui/components/input_key_button.gd" id="1_b51te"]
+
+[node name="InputKeyButton" type="Button" unique_id=1668651101]
+offset_right = 8.0
+offset_bottom = 8.0
+theme_type_variation = &"InputKeyButton"
+toggle_mode = true
+text = "X"
+script = ExtResource("1_b51te")

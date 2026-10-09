@@ -64,6 +64,38 @@ corner_radius_bottom_left = 6
 expand_margin_top = 8.0
 expand_margin_bottom = 8.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qv78t"]
+bg_color = Color(0.7953939, 0.79539394, 0.7953938, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0.5882353, 0.4117647, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 8.0
+expand_margin_top = 4.0
+expand_margin_right = 8.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4s6iq"]
+bg_color = Color(0.7953939, 0.79539394, 0.7953938, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 8.0
+expand_margin_top = 4.0
+expand_margin_right = 8.0
+expand_margin_bottom = 4.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3xb56"]
 content_margin_left = 20.0
 content_margin_top = 10.0
@@ -271,6 +303,20 @@ HSlider/icons/grabber_highlight = SubResource("DPITexture_g1fjd")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_d67f2")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_xw7tv")
 HSlider/styles/slider = SubResource("StyleBoxFlat_jwcag")
+InputKeyButton/base_type = &"Button"
+InputKeyButton/colors/font_color = Color(0, 0.5882353, 0.4117647, 1)
+InputKeyButton/colors/font_disabled_color = Color(0, 0.5882353, 0.4117647, 1)
+InputKeyButton/colors/font_focus_color = Color(0, 0.5882353, 0.4117647, 1)
+InputKeyButton/colors/font_hover_color = Color(0, 0.5882353, 0.4117647, 1)
+InputKeyButton/colors/font_hover_pressed_color = Color(0, 0.5882353, 0.4117647, 1)
+InputKeyButton/colors/font_outline_color = Color(0, 0.5882353, 0.4117647, 1)
+InputKeyButton/colors/font_pressed_color = Color(0, 0.5882353, 0.4117647, 1)
+InputKeyButton/font_sizes/font_size = 48
+InputKeyButton/fonts/font = ExtResource("1_g1fjd")
+InputKeyButton/styles/focus = SubResource("StyleBoxFlat_qv78t")
+InputKeyButton/styles/hover = SubResource("StyleBoxFlat_qv78t")
+InputKeyButton/styles/normal = SubResource("StyleBoxFlat_4s6iq")
+InputKeyButton/styles/pressed = SubResource("StyleBoxFlat_qv78t")
 Label/font_sizes/font_size = 32
 Label/fonts/font = ExtResource("1_g1fjd")
 MainMenuButton/base_type = &"Button"
