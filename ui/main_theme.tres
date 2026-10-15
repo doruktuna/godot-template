@@ -23,6 +23,18 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d67f2"]
+bg_color = Color(0.65882355, 0.18039216, 0.1764706, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.98939866, 0.98939866, 0.98939854, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_d67f2"]
 color = Color(1, 1, 1, 1)
 thickness = 2
@@ -37,7 +49,7 @@ _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\">
 "
 base_scale = 1.5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d67f2"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_snn42"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
@@ -296,11 +308,13 @@ corner_detail = 5
 CheckBox/icons/checked = SubResource("DPITexture_6tukj")
 CheckBox/icons/unchecked = SubResource("DPITexture_3xb56")
 CheckBox/styles/focus = SubResource("StyleBoxFlat_g1fjd")
+ErrorBox/base_type = &"PanelContainer"
+ErrorBox/styles/panel = SubResource("StyleBoxFlat_d67f2")
 HSeparator/styles/separator = SubResource("StyleBoxLine_d67f2")
 HSlider/icons/grabber = SubResource("DPITexture_g1fjd")
 HSlider/icons/grabber_disabled = SubResource("DPITexture_joxlk")
 HSlider/icons/grabber_highlight = SubResource("DPITexture_g1fjd")
-HSlider/styles/grabber_area = SubResource("StyleBoxFlat_d67f2")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_snn42")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_xw7tv")
 HSlider/styles/slider = SubResource("StyleBoxFlat_jwcag")
 InputKeyButton/base_type = &"Button"

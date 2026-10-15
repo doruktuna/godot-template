@@ -208,3 +208,14 @@ func _set_keyboard_inputs(action: String, value: Variant) -> void:
 		var event := InputEventKey.new()
 		event.physical_keycode = physical_keycode
 		InputMap.action_add_event(action, event)
+
+
+func check_keyboard_key_is_used(physical_keycode: int, action_to_exclude: String = "") -> String:
+	for action in INPUT_ACTIONS:
+		if action == action_to_exclude:
+			continue
+		
+		if physical_keycode in get_setting("keyboard_inputs", action):
+			return action
+
+	return ""

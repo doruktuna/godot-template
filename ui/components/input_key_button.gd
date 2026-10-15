@@ -4,30 +4,52 @@ extends Button
 enum ControllerType {KEYBOARD, MOUSE, JOYPAD_BUTTON, JOYPAD_MOTION}
 
 var controller_type: ControllerType
-var action: String
+var action_name: String
 var action_ind: int
 
 var old_text: String
 
 signal change_input_requested(input_key_button: InputKeyButton, new_event: InputEvent)
 
+static var listening_button: InputKeyButton = null
+
 
 func _ready() -> void:
-	set_process_unhandled_input(false)
+	old_text = text
+	_stop_listening()
+
+
+func _start_listening() -> void:
+	listening_button = self
+	old_text = text
+	text = "..."
+	set_process_input(true)
+
+
+func _stop_listening() -> void:
+	button_pressed = false
+	set_process_input(false)
+	if listening_button == self:
+		listening_button = null
+	text = old_text
 
 
 func _toggled(toggled_on: bool) -> void:
-	set_process_unhandled_input(toggled_on)
 	if toggled_on:
-		old_text = text
-		text = "..."
+		_start_listening()
+	else:
+		_stop_listening()
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_pressed() and is_controller_type_match(event):
+func _input(event: InputEvent) -> void:
+	# Swallow everything while listening
+	get_viewport().set_input_as_handled()
+	
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		_stop_listening()
+	elif event.is_pressed() and is_controller_type_match(event):
 		print("Pressed: ", event)
-		button_pressed = false
-		text = old_text
+		_stop_listening()
 		change_input_requested.emit(self, event)
 
 

@@ -25,13 +25,17 @@ extends Control
 @onready var keyboard_defaults_button: Button = %KeyboardDefaultsButton
 @onready var keyboard_inputs_container: GridContainer = %KeyboardInputsContainer
 
+# Error box/popup
+@onready var error_box: PanelContainer = %ErrorBox
+@onready var error_box_text: Label = %ErrorBoxText
+
 const INPUT_KEY_BUTTON_SCENE: PackedScene = preload("res://ui/components/input_key_button.tscn")
 
-const INPUT_ACTION_NAMES: Array[String] = ["up", "down", "left", "right", "action"]
+const KEYBOARD_ACTION_NAMES: Array[String] = ["up", "down", "left", "right", "action"]
 
 
 func _ready() -> void:
-	settings_tabs.current_tab = 0
+	settings_tabs.current_tab = 2
 	settings_tabs.get_tab_bar().grab_focus()
 
 	discard_button.pressed.connect(_on_discard_pressed)
@@ -59,6 +63,9 @@ func _ready() -> void:
 	_update_audio_ui_from_settings()
 	_update_video_ui_from_settings()
 	_update_keyboard_ui_from_settings()
+
+	# Hide error box
+	error_box.hide()
 
 	# Start editing (this is important to restore values if the settings are discarded)
 	SettingsManager.start_editing_settings()
@@ -179,7 +186,7 @@ func _update_keyboard_ui_from_settings() -> void:
 
 	var upper_buttons: Array[InputKeyButton] = []
 	
-	for action_name in INPUT_ACTION_NAMES:
+	for action_name in KEYBOARD_ACTION_NAMES:
 		var cur_buttons: Array[InputKeyButton] = []
 		var label := Label.new()
 		label.text = action_name.capitalize()
@@ -198,7 +205,7 @@ func _update_keyboard_ui_from_settings() -> void:
 			var ikb: InputKeyButton = INPUT_KEY_BUTTON_SCENE.instantiate()
 			ikb.text = OS.get_keycode_string(keycode)
 			ikb.controller_type = InputKeyButton.ControllerType.KEYBOARD
-			ikb.action = action_name
+			ikb.action_name = action_name
 			ikb.action_ind = i
 			ikb.change_input_requested.connect(_on_change_input_requested)
 			keys_container.add_child(ikb)
@@ -237,10 +244,30 @@ func _on_change_input_requested(ikb: InputKeyButton, new_event: InputEvent) -> v
 	if InputMap.event_is_action(new_event, "pause"):
 		return
 
-	# TODO Add duplication control and warn the user
-	# TODO Dont allow for clicking other buttons when one of them is clicked
+	# Duplication control, warn the user if there is one
+	var conflicting_action := ""
 	if new_event is InputEventKey:
-		SettingsManager.set_input_change("keyboard_inputs", ikb.action, ikb.action_ind, new_event.physical_keycode)
+		conflicting_action = SettingsManager.check_keyboard_key_is_used(new_event.physical_keycode, ikb.action_name)
+
+	if conflicting_action != "":
+		var error_msg := "Input conflicts with another action: " + conflicting_action.capitalize()
+		_show_error_box(error_msg)
+		return
+
+	# All is good, change the input key and button text
+	if new_event is InputEventKey:
+		SettingsManager.set_input_change("keyboard_inputs", ikb.action_name, ikb.action_ind, new_event.physical_keycode)
 		var physical_keycode = new_event.physical_keycode
 		var keycode := DisplayServer.keyboard_get_keycode_from_physical(physical_keycode)
 		ikb.text = OS.get_keycode_string(keycode)
+
+
+func _show_error_box(msg: String) -> void:
+	error_box.show()
+	error_box.modulate.a = 0
+	error_box_text.text = msg
+	var tween := create_tween()
+	tween.tween_property(error_box, "modulate:a", 1, 0.3)
+	tween.tween_interval(3)
+	tween.tween_property(error_box, "modulate:a", 0, 0.3)
+	tween.tween_callback(error_box.hide)
