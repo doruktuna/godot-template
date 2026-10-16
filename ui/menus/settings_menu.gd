@@ -241,34 +241,12 @@ func _update_keyboard_ui_from_settings() -> void:
 		var physical_keycodes: Array = SettingsManager.get_setting("keyboard_inputs", action_name)
 		for i in physical_keycodes.size():
 			var physical_keycode = physical_keycodes[i]
-			var keycode := DisplayServer.keyboard_get_keycode_from_physical(physical_keycode)
-			var ikb: InputKeyButton = INPUT_KEY_BUTTON_SCENE.instantiate()
-			ikb.text = OS.get_keycode_string(keycode)
-			ikb.controller_type = InputKeyButton.ControllerType.KEYBOARD
-			ikb.action_name = action_name
-			ikb.action_ind = i
-			ikb.change_input_requested.connect(_on_change_input_requested)
+			var ikb = _create_input_key_button(action_name, i, InputKeyButton.ControllerType.KEYBOARD, physical_keycode)
 			keys_container.add_child(ikb)
 			cur_buttons.append(ikb)
 
 		# Setup neighbours for a better navigation
-		for i in cur_buttons.size():
-			var ikb = cur_buttons[i]
-
-			# Up-down
-			if upper_buttons.size() > i:
-				upper_buttons[i].focus_neighbor_bottom = ikb.get_path()
-				ikb.focus_neighbor_top = upper_buttons[i].get_path()
-
-			# Right-left
-			if i < cur_buttons.size() - 1:
-				cur_buttons[i + 1].focus_neighbor_left = ikb.get_path()
-				ikb.focus_neighbor_right = cur_buttons[i + 1].get_path()
-
-			# Left most to upper right most
-			if i == 0 and upper_buttons.size() > 0:
-				upper_buttons[-1].focus_neighbor_right = ikb.get_path()
-				ikb.focus_neighbor_left = upper_buttons[-1].get_path()
+		_connect_input_button_neighbours(cur_buttons, upper_buttons)
 
 		upper_buttons = cur_buttons
 
@@ -297,41 +275,15 @@ func _update_joypad_ui_from_settings() -> void:
 		joypad_inputs_container.add_child(keys_container)
 		
 		# Instantiate input key buttons and set their properties
-		var button_inds: Array = SettingsManager.get_setting("joypad_button_inputs", action_name)
-		for i in button_inds.size():
-			var button_ind = button_inds[i]
-			var ikb: InputKeyButton = INPUT_KEY_BUTTON_SCENE.instantiate()
-			ikb.text = joy_button_text(button_ind)
-			ikb.controller_type = InputKeyButton.ControllerType.JOYPAD_BUTTON
-			ikb.action_name = action_name
-			ikb.action_ind = i
-			ikb.change_input_requested.connect(_on_change_input_requested)
+		var joypad_indices: Array = SettingsManager.get_setting("joypad_button_inputs", action_name)
+		for i in joypad_indices.size():
+			var joypad_indice = joypad_indices[i]
+			var ikb = _create_input_key_button(action_name, i, InputKeyButton.ControllerType.JOYPAD_BUTTON, joypad_indice)
 			keys_container.add_child(ikb)
 			cur_buttons.append(ikb)
 
 		# Setup neighbours for a better navigation
-		for i in cur_buttons.size():
-			var ikb = cur_buttons[i]
-
-			# Top-left to tab container
-			if i == 0 and upper_buttons.size() == 0:
-				ikb.focus_neighbor_left = settings_tabs.get_tab_bar().get_path()
-				ikb.focus_neighbor_top = settings_tabs.get_tab_bar().get_path()
-
-			# Left most to upper right most
-			if i == 0 and upper_buttons.size() > 0:
-				upper_buttons[-1].focus_neighbor_right = ikb.get_path()
-				ikb.focus_neighbor_left = upper_buttons[-1].get_path()
-
-			# Up-down
-			if upper_buttons.size() > i:
-				upper_buttons[i].focus_neighbor_bottom = ikb.get_path()
-				ikb.focus_neighbor_top = upper_buttons[i].get_path()
-
-			# Right-left
-			if i < cur_buttons.size() - 1:
-				cur_buttons[i + 1].focus_neighbor_left = ikb.get_path()
-				ikb.focus_neighbor_right = cur_buttons[i + 1].get_path()
+		_connect_input_button_neighbours(cur_buttons, upper_buttons)
 
 		upper_buttons = cur_buttons
 
@@ -340,6 +292,46 @@ func _update_joypad_ui_from_settings() -> void:
 	upper_buttons[-1].focus_neighbor_right = joypad_defaults_button.get_path()
 	joypad_defaults_button.focus_neighbor_left = upper_buttons[-1].get_path()
 	joypad_defaults_button.focus_neighbor_top = upper_buttons[-1].get_path()
+
+
+# key_value is physical_keycode for keyboard keys and button index for joypad buttons
+func _create_input_key_button(action_name: String, action_ind: int, btn_type: InputKeyButton.ControllerType, key_value: int) -> InputKeyButton:
+	var ikb: InputKeyButton = INPUT_KEY_BUTTON_SCENE.instantiate()
+	if btn_type == InputKeyButton.ControllerType.KEYBOARD:
+		var keycode = DisplayServer.keyboard_get_keycode_from_physical(key_value)
+		ikb.text = OS.get_keycode_string(keycode)
+	elif btn_type == InputKeyButton.ControllerType.JOYPAD_BUTTON:
+		ikb.text = joy_button_text(key_value)
+	ikb.controller_type = btn_type
+	ikb.action_name = action_name
+	ikb.action_ind = action_ind
+	ikb.change_input_requested.connect(_on_change_input_requested)
+	return ikb
+
+
+func _connect_input_button_neighbours(cur_buttons: Array[InputKeyButton], upper_buttons: Array[InputKeyButton]) -> void:
+	for i in cur_buttons.size():
+		var ikb = cur_buttons[i]
+
+		# Top-left to tab container
+		if i == 0 and upper_buttons.size() == 0:
+			ikb.focus_neighbor_left = settings_tabs.get_tab_bar().get_path()
+			ikb.focus_neighbor_top = settings_tabs.get_tab_bar().get_path()
+
+		# Up-down
+		if upper_buttons.size() > i:
+			upper_buttons[i].focus_neighbor_bottom = ikb.get_path()
+			ikb.focus_neighbor_top = upper_buttons[i].get_path()
+
+		# Right-left
+		if i < cur_buttons.size() - 1:
+			cur_buttons[i + 1].focus_neighbor_left = ikb.get_path()
+			ikb.focus_neighbor_right = cur_buttons[i + 1].get_path()
+
+		# Left most to upper right most
+		if i == 0 and upper_buttons.size() > 0:
+			upper_buttons[-1].focus_neighbor_right = ikb.get_path()
+			ikb.focus_neighbor_left = upper_buttons[-1].get_path()
 
 
 func joy_button_text(button_index: JoyButton) -> String:
