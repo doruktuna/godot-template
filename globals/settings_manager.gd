@@ -29,7 +29,11 @@ var DEFAULTS := {
 	"joypad_motion_inputs": {},
 }
 
-const INPUT_ACTIONS = ["up", "down", "left", "right", "action"]
+const INPUT_ACTIONS = ["up", "down", "left", "right", "action", "action_2"]
+
+const JOYPAD_BLACKLIST: Array[String] = [
+	"keyboard", "keychron", "system control", "consumer control", "mouse", "touchpad",
+]
 
 # Use old config to restore values when value changes are discarded
 var _config := ConfigFile.new()
@@ -189,6 +193,9 @@ func _apply(section: String, key: String, value: Variant) -> void:
 		["keyboard_inputs", var action]:
 			_set_keyboard_inputs(action, value)
 
+		["joypad_button_inputs", var action]:
+			_set_joypad_inputs(action, value)
+
 	
 func _set_bus_volume(bus_name: String, linear: float) -> void:
 	var idx := AudioServer.get_bus_index(bus_name)
@@ -210,6 +217,19 @@ func _set_keyboard_inputs(action: String, value: Variant) -> void:
 		InputMap.action_add_event(action, event)
 
 
+func _set_joypad_inputs(action: String, value: Variant) -> void:
+	# Clear events
+	for event in InputMap.action_get_events(action):
+		if event is InputEventJoypadButton:
+			InputMap.action_erase_event(action, event)
+
+	# Add events from array
+	for button_ind in value:
+		var event := InputEventJoypadButton.new()
+		event.button_index = button_ind
+		InputMap.action_add_event(action, event)
+
+
 func check_keyboard_key_is_used(physical_keycode: int, action_to_exclude: String = "") -> String:
 	for action in INPUT_ACTIONS:
 		if action == action_to_exclude:
@@ -219,3 +239,35 @@ func check_keyboard_key_is_used(physical_keycode: int, action_to_exclude: String
 			return action
 
 	return ""
+
+
+func check_joypad_button_is_used(button_index: int, action_to_exclude: String = "") -> String:
+	for action in INPUT_ACTIONS:
+		if action == action_to_exclude:
+			continue
+		
+		if button_index in get_setting("joypad_button_inputs", action):
+			return action
+
+	return ""
+
+
+func get_real_joypads() -> Array[int]:
+	var result: Array[int] = []
+	for id in Input.get_connected_joypads():
+		if _is_real_joypad(id):
+			result.append(id)
+	return result
+
+
+func _is_real_joypad(id: int) -> bool:
+	if Input.is_joy_known(id):
+		return true
+
+	var joy_name := Input.get_joy_name(id).to_lower()
+	for part in JOYPAD_BLACKLIST:
+		if part in joy_name:
+			return false
+
+	# Unknown but not in blacklist: Give it the benefit of the doubt
+	return true
