@@ -2,11 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://dapex8y1dbqel" path="res://ui/menus/main_menu_bg.jpg" id="1_nym0d"]
 [ext_resource type="Script" uid="uid://cnw6pa2r0u4x6" path="res://ui/menus/credits.gd" id="1_wut5r"]
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_wut5r"]
-color = Color(1, 1, 1, 1)
+[ext_resource type="Texture2D" uid="uid://cpp0wcvw5iruq" path="res://godot-icon.svg" id="3_6qsxc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6qsxc"]
+bg_color = Color(0, 0, 0, 0.35686275)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d67f2"]
 
 [node name="Credits" type="Control" unique_id=550261112]
 layout_mode = 3
@@ -27,47 +28,147 @@ grow_vertical = 2
 texture = ExtResource("1_nym0d")
 expand_mode = 3
 
-[node name="Panel" type="Panel" parent="." unique_id=1358306619]
-custom_minimum_size = Vector2(500, 500)
+[node name="Panel" type="Panel" parent="." unique_id=259152375]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6qsxc")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=695369153]
-layout_mode = 0
-offset_top = 20.0
-offset_right = 500.0
-offset_bottom = 480.0
+[node name="Content" type="VBoxContainer" parent="." unique_id=556624972]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_right = 0.8
 grow_horizontal = 2
-grow_vertical = 2
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer" unique_id=2128390905]
+[node name="RichTextLabel" type="RichTextLabel" parent="Content" unique_id=1852219860]
 layout_mode = 2
-theme_type_variation = &"MenuLabel"
-text = "CREDITS"
+bbcode_enabled = true
+text = "[center][b][color=DODGER_BLUE][font_size=96][u]2D Project Template[/u][/font_size][/color][/b][/center]
+
+
+[p align=c]Created by [b][color=orange]Doruk Tuna[/color][/b][/p]
+
+[p align=c]For learning and as a starting template[/p]
+
+[p align=c]You can use any kind of control nodes, its basically scrolled by changing the position of the Content node[/p]
+
+[p align=c]This part uses a [color=red]RichTextLabel[/color][/p]
+
+[p align=c]Which allows for some fancy animations
+[pulse freq=1.0 color=#ff5599 ease=-3.0]Pulsing Colors[/pulse]
+
+[wave amp=50.0 freq=2.0 connected=1]Waving Text[/wave]
+
+[tornado radius=10.0 freq=1.0 connected=1]Tornado Effect[/tornado]
+
+[shake rate=20.0 level=5 connected=1]Shaking Text[/shake]
+
+[rainbow freq=0.4 sat=0.8 val=0.8 speed=1.0]Rainbow Colors[/rainbow]
+[/p]
+
+[p align=c]Check BBCode for many markup options[/p]
+"
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator" type="HSeparator" parent="Content" unique_id=1205596283]
+layout_mode = 2
+theme_override_constants/separation = 200
+theme_override_styles/separator = SubResource("StyleBoxEmpty_d67f2")
+
+[node name="Label" type="Label" parent="Content" unique_id=380868387]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Control Nodes"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer" unique_id=2010141903]
+[node name="Label2" type="Label" parent="Content" unique_id=1285819627]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxLine_wut5r")
+text = "This part is made up of nodes, heading and this text are Labels, below part uses a HBoxContainer and TextureRects"
+horizontal_alignment = 1
+autowrap_mode = 2
 
-[node name="HSeparator2" type="HSeparator" parent="Panel/VBoxContainer" unique_id=1618482061]
+[node name="HSeparator2" type="HSeparator" parent="Content" unique_id=1398027829]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/separator = SubResource("StyleBoxFlat_6qsxc")
+theme_override_constants/separation = 100
+theme_override_styles/separator = SubResource("StyleBoxEmpty_d67f2")
 
-[node name="Label2" type="Label" parent="Panel/VBoxContainer" unique_id=4639088]
-custom_minimum_size = Vector2(200, 0)
+[node name="Label3" type="Label" parent="Content" unique_id=473129190]
 layout_mode = 2
-text = "Credits will roll here. Click left mouse or a cancel button to return to main menu."
+text = "You can use code or animation player to do any fancy animation you want"
+horizontal_alignment = 1
+
+[node name="HSeparator3" type="HSeparator" parent="Content" unique_id=744212330]
+layout_mode = 2
+theme_override_constants/separation = 40
+theme_override_styles/separator = SubResource("StyleBoxEmpty_d67f2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Content" unique_id=966945922]
+layout_mode = 2
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="SpinningGodot" type="TextureRect" parent="Content/HBoxContainer" unique_id=895574073]
+unique_name_in_owner = true
+layout_mode = 2
+offset_transform_enabled = true
+texture = ExtResource("3_6qsxc")
+
+[node name="ScalingGodot" type="TextureRect" parent="Content/HBoxContainer" unique_id=1846396912]
+unique_name_in_owner = true
+layout_mode = 2
+offset_transform_enabled = true
+texture = ExtResource("3_6qsxc")
+
+[node name="ModulatingGodot" type="TextureRect" parent="Content/HBoxContainer" unique_id=868053090]
+unique_name_in_owner = true
+layout_mode = 2
+offset_transform_enabled = true
+texture = ExtResource("3_6qsxc")
+
+[node name="HSeparator4" type="HSeparator" parent="Content" unique_id=2049650369]
+layout_mode = 2
+theme_override_constants/separation = 800
+theme_override_styles/separator = SubResource("StyleBoxEmpty_d67f2")
+
+[node name="ThanksLabel" type="Label" parent="Content" unique_id=868612293]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.14901961, 0.5176471, 0.9098039, 1)
+theme_override_font_sizes/font_size = 128
+text = "Thanks for playing!"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1007728246]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.97
+anchor_top = 0.97
+anchor_right = 0.97
+anchor_bottom = 0.97
+offset_left = -300.0
+offset_top = -120.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=89410450]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="InstructionLabel" type="Label" parent="PanelContainer/MarginContainer" unique_id=1663828948]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.09700347, 0.87975895, 0.5941785, 1)
+text = "Click action or left mouse button to speed up"
 horizontal_alignment = 1
 autowrap_mode = 2

@@ -1,6 +1,7 @@
 [gd_resource type="Theme" format=3 uid="uid://ddj8ug4cq20r3"]
 
 [ext_resource type="FontFile" uid="uid://btlmri3nnejjg" path="res://assets/fonts/Roboto-VariableFont_wdth,wght.ttf" id="1_g1fjd"]
+[ext_resource type="FontFile" uid="uid://dv26q54xmto6e" path="res://assets/fonts/Roboto-Italic-VariableFont_wdth,wght.ttf" id="2_6tukj"]
 
 [sub_resource type="DPITexture" id="DPITexture_6tukj"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><rect width=\"14\" height=\"14\" x=\"1\" y=\"1\" fill=\"#fff\" fill-opacity=\".75\" rx=\"2.333\"/><path fill=\"#1a1a1a\" d=\"m11.5 3.75-5.6 5.6-1.7-1.7-1.5 1.5 3.2 3.2 7.1-7.1z\"/></svg>
@@ -422,3 +423,12 @@ OptionButton/font_sizes/font_size = 24
 OptionButton/styles/focus = SubResource("StyleBoxFlat_0acqk")
 OptionButton/styles/hover = SubResource("StyleBoxFlat_0acqk")
 OptionButton/styles/normal = SubResource("StyleBoxFlat_efp5j")
+RichTextLabel/font_sizes/bold_font_size = 48
+RichTextLabel/font_sizes/bold_italics_font_size = 48
+RichTextLabel/font_sizes/italics_font_size = 48
+RichTextLabel/font_sizes/mono_font_size = 48
+RichTextLabel/font_sizes/normal_font_size = 48
+RichTextLabel/fonts/bold_italics_font = ExtResource("2_6tukj")
+RichTextLabel/fonts/italics_font = ExtResource("2_6tukj")
+RichTextLabel/fonts/mono_font = ExtResource("1_g1fjd")
+RichTextLabel/fonts/normal_font = ExtResource("1_g1fjd")
