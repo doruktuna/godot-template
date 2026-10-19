@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cftl1iy03fmos"]
 
 [ext_resource type="Script" uid="uid://bl2ktdnl7ow47" path="res://globals/debug_overlay.gd" id="1_gbklx"]
+[ext_resource type="Texture2D" uid="uid://bhx3uwkvljppf" path="res://globals/debug_ss_info.png" id="2_k0pbu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d67f2"]
 
@@ -25,6 +26,7 @@ layout_mode = 2
 [node name="InfoLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=730695114]
 layout_mode = 2
 text = "INFO"
+horizontal_alignment = 1
 
 [node name="InfoContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=249545016]
 layout_mode = 2
@@ -33,11 +35,22 @@ columns = 2
 [node name="FPSLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/InfoContainer" unique_id=748756299]
 layout_mode = 2
 text = "FPS:"
+horizontal_alignment = 2
 
 [node name="FPSValue" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/InfoContainer" unique_id=781142224]
 unique_name_in_owner = true
 layout_mode = 2
 text = "60"
+
+[node name="RAMLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/InfoContainer" unique_id=211659523]
+layout_mode = 2
+text = "RAM:"
+horizontal_alignment = 2
+
+[node name="RAMValue" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/InfoContainer" unique_id=1832941527]
+unique_name_in_owner = true
+layout_mode = 2
+text = "123 MB"
 
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1800211688]
 layout_mode = 2
@@ -50,6 +63,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_d67f2")
 [node name="ActionsLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1690655077]
 layout_mode = 2
 text = "ACTIONS"
+horizontal_alignment = 1
 
 [node name="RestartButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1008042747]
 unique_name_in_owner = true
@@ -75,3 +89,24 @@ text = "MAIN MENU"
 unique_name_in_owner = true
 layout_mode = 2
 text = "QUIT"
+
+[node name="HSeparator4" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1061285756]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="HSeparator3" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1660503057]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_d67f2")
+
+[node name="SSLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=877843075]
+layout_mode = 2
+text = "SS (F3)"
+horizontal_alignment = 1
+
+[node name="SSTextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1385508582]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+texture = ExtResource("2_k0pbu")
+expand_mode = 3
