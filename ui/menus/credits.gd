@@ -1,7 +1,7 @@
 class_name Credits
 extends Control
 
-@export var scroll_speed := 60.0 * 10 # pixels per second
+@export var scroll_speed := 60.0 # pixels per second
 @export var fast_multiplier := 4.0
 @export var ramp := 400.0 # speed change per second
 
