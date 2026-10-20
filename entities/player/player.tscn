@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cpp0wcvw5iruq" path="res://godot-icon.svg" id="2_abrql"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d67f2"]
-size = Vector2(130, 128)
+size = Vector2(128, 128)
 
 [node name="Player" type="CharacterBody2D" unique_id=595098128]
 collision_layer = 2
@@ -14,7 +14,7 @@ script = ExtResource("1_abrql")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=217560675]
 texture = ExtResource("2_abrql")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=696195505]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=696195505 groups=["persistent"]]
 shape = SubResource("RectangleShape2D_d67f2")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1390011366]
