@@ -167,7 +167,7 @@ offset_right = 642.0
 offset_bottom = -1258.0
 theme_type_variation = &"LevelLabel"
 text = "Try action button 
-to grow/shrink"
+to rotate"
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -191,7 +191,7 @@ offset_right = 642.0
 offset_bottom = -3110.0
 theme_type_variation = &"LevelLabel"
 text = "You can save/load as well
-Use F5 and F8 for quick save/load
+Use F11 and F12 for quick save/load
 Or use pause menu to save/load"
 horizontal_alignment = 1
 autowrap_mode = 2
@@ -219,7 +219,7 @@ shape = SubResource("RectangleShape2D_hs8vu")
 debug_color = Color(0.3335298, 0.6056067, 0.42073593, 0.41960785)
 
 [node name="Player" parent="." unique_id=595098128 instance=ExtResource("3_4b4lo")]
-position = Vector2(0, -4456)
+position = Vector2(0, -2)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=680209922]
 

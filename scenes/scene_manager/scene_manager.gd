@@ -1,7 +1,7 @@
 class_name SceneManager
 extends Node
 
-@export var start_scene: PackedScene
+@export var start_scene: Scene
 
 @onready var scene_container: Node = $SceneContainer
 @onready var persist_objects: Node = $PersistObjects
@@ -21,6 +21,8 @@ const SCENES := {
 	Scene.LEVEL_2: "uid://m3wdqb178x4o",
 }
 
+var cur_scene: Scene
+
 
 func _ready() -> void:
 	instantiate_start_scene()
@@ -28,27 +30,29 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("test"):
-		print("--- TEST ---")
-		var search := "Player"
-		var child := scene_container.find_child(search, true, false)
-		if child:
-			print("A pn match is found: ", search, ", ", child)
-		else:
-			print("A pn match couldn't be found: ", search, ", in ", scene_container)
-		print()
+	if event.is_action_pressed("quick_save"):
+		EventBus.save_requested.emit("quick_save", cur_scene)
+
+	if event.is_action_pressed("quick_load"):
+		EventBus.load_requested.emit("quick_save")
 
 
 func instantiate_start_scene() -> void:
+	get_tree().paused = true
 	snapshot.hide()
 
-	var scene_to_add := start_scene.instantiate()
-	scene_container.add_child(scene_to_add)
+	ResourceLoader.load_threaded_request(SCENES[start_scene])
 
-	animation_player.play("fade_out")
-	await animation_player.animation_finished
+	var new_scene := await add_new_scene(start_scene)
+	var original_mode := new_scene.process_mode
+	new_scene.process_mode = Node.PROCESS_MODE_DISABLED
 
-	transition_layer.hide()
+	# Fade in and unpause the game
+	await fade_in_animation()
+	new_scene.process_mode = original_mode
+	get_tree().paused = false
+
+	cur_scene = start_scene
 
 
 func _on_scene_change_request(scene: Scene, params: Dictionary) -> void:
@@ -56,7 +60,7 @@ func _on_scene_change_request(scene: Scene, params: Dictionary) -> void:
 	change_to_scene(scene, params)
 
 
-func change_to_scene(scene: Scene, _params: Dictionary) -> void:
+func change_to_scene(scene: Scene, params: Dictionary) -> void:
 	get_tree().paused = true
 
 	# Reparent persistent objects to PersistObjects node so that they aren't freed
@@ -78,10 +82,25 @@ func change_to_scene(scene: Scene, _params: Dictionary) -> void:
 	# Restore persistent objects to the new scene
 	restore_persistent_objects()
 
+	# If its a load, set saveable objects' properties
+	if params and params.has("load_data"):
+		await SaveManager.load_saveable_nodes(params["load_data"])
+	
+	# Allow a frame to settle changes
+	new_scene.process_mode = original_mode
+	get_tree().paused = false
+	await get_tree().process_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
+	new_scene.process_mode = Node.PROCESS_MODE_DISABLED
+	get_tree().paused = true
+
 	# Fade in and unpause the game
 	await fade_in_animation()
 	new_scene.process_mode = original_mode
 	get_tree().paused = false
+
+	cur_scene = scene
 
 	
 func capture_persistent_objects() -> void:

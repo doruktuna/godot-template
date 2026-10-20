@@ -38,3 +38,21 @@ func start_persisting() -> void:
 func end_persisting() -> void:
 	process_mode = Node.PROCESS_MODE_INHERIT
 	velocity = Vector2.ZERO
+
+
+func save() -> Dictionary:
+	var data := {
+		"global_position": global_position,
+		"rotation": rotation,
+		"sprite_rotation": sprite.rotation,
+		"color_ind": color_ind
+	}
+	return data
+
+
+func load(data: Dictionary) -> void:
+	global_position = data["global_position"]
+	rotation = data["rotation"]
+	sprite.rotation = data["sprite_rotation"]
+	color_ind = data["color_ind"]
+	sprite.modulate = COLORS[color_ind]

@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d67f2"]
 size = Vector2(128, 128)
 
-[node name="Player" type="CharacterBody2D" unique_id=595098128 groups=["persistent"]]
+[node name="Player" type="CharacterBody2D" unique_id=595098128 groups=["persistent", "saveable"]]
 collision_layer = 2
 collision_mask = 29
 script = ExtResource("1_abrql")

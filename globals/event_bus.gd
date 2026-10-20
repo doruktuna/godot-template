@@ -8,6 +8,10 @@ signal player_died
 # Scene management signals
 signal scene_change_requested(scene: SceneManager.Scene, params: Dictionary)
 
+# Save/load signals
+signal save_requested(file_path: String, cur_scene: SceneManager.Scene)
+signal load_requested(file_path: String)
+
 # Level/Game signals
 signal quit_requested
 signal restart_requested
