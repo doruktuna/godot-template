@@ -4,6 +4,7 @@ extends Node
 @export var start_scene: PackedScene
 
 @onready var scene_container: Node = $SceneContainer
+@onready var persist_objects: Node = $PersistObjects
 @onready var transition_layer: CanvasLayer = $TransitionLayer
 @onready var snapshot: TextureRect = $TransitionLayer/Snapshot
 @onready var overlay: ColorRect = $TransitionLayer/Overlay
@@ -26,6 +27,18 @@ func _ready() -> void:
 	EventBus.scene_change_requested.connect(_on_scene_change_request)
 
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("test"):
+		print("--- TEST ---")
+		var search := "Player"
+		var child := scene_container.find_child(search, true, false)
+		if child:
+			print("A pn match is found: ", search, ", ", child)
+		else:
+			print("A pn match couldn't be found: ", search, ", in ", scene_container)
+		print()
+
+
 func instantiate_start_scene() -> void:
 	snapshot.hide()
 
@@ -46,6 +59,9 @@ func _on_scene_change_request(scene: Scene, params: Dictionary) -> void:
 func change_to_scene(scene: Scene, _params: Dictionary) -> void:
 	get_tree().paused = true
 
+	# Reparent persistent objects to PersistObjects node so that they aren't freed
+	capture_persistent_objects()
+
 	# This starts loading the new scene into memory
 	ResourceLoader.load_threaded_request(SCENES[scene])
 
@@ -58,12 +74,42 @@ func change_to_scene(scene: Scene, _params: Dictionary) -> void:
 	var new_scene := await add_new_scene(scene)
 	var original_mode := new_scene.process_mode
 	new_scene.process_mode = Node.PROCESS_MODE_DISABLED
+
+	# Restore persistent objects to the new scene
+	restore_persistent_objects()
+
+	# Fade in and unpause the game
 	await fade_in_animation()
 	new_scene.process_mode = original_mode
-	
 	get_tree().paused = false
 
 	
+func capture_persistent_objects() -> void:
+	print("CAPTURING PERSISTENT OBJECTS")
+	var persistent_nodes := get_tree().get_nodes_in_group("persistent")
+	for pn in persistent_nodes:
+		pn.start_persisting()
+		pn.reparent.call_deferred(persist_objects)
+
+
+func restore_persistent_objects() -> void:
+	for pn in persist_objects.get_children():
+		# If a node with same name exists in the new scene
+		var child := scene_container.find_child(pn.name, true, false)
+		if child:
+			print("A pn match is found: ", pn.name, ", ", child)
+			child.name = child.name + "_TO_BE_FREED"
+			pn.reparent(child.get_parent())
+			if pn is Node2D:
+				pn.global_position = child.global_position
+				pn.rotation = child.rotation
+			pn.end_persisting()
+			child.queue_free()
+		else:
+			print("A pn match couldn't be found: ", pn.name)
+			pn.queue_free()
+
+		
 func capture_and_show_snapshot() -> void:
 	# Wait the frame draw in order not to capture unfinished frames
 	await RenderingServer.frame_post_draw

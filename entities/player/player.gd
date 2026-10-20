@@ -28,3 +28,13 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("action_2"):
 		color_ind = posmod(color_ind + 1, COLORS.size())
 		sprite.modulate = COLORS[color_ind]
+
+
+func start_persisting() -> void:
+	process_mode = Node.PROCESS_MODE_DISABLED
+	velocity = Vector2.ZERO
+
+
+func end_persisting() -> void:
+	process_mode = Node.PROCESS_MODE_INHERIT
+	velocity = Vector2.ZERO

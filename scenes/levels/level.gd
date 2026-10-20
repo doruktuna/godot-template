@@ -45,4 +45,5 @@ func _on_main_menu_requested() -> void:
 
 
 func _on_finish_area_body_entered(body: Node2D) -> void:
+	print("FINISH AREA ENTERED: ", self, ", ", body)
 	EventBus.scene_change_requested.emit(next_scene, {})
