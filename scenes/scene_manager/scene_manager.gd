@@ -10,13 +10,14 @@ extends Node
 @onready var loading_label: Label = $TransitionLayer/LoadingLabel
 @onready var animation_player: AnimationPlayer = $TransitionLayer/AnimationPlayer
 
-enum Scene {MAIN_MENU, SETTINGS_MENU, CREDITS, LEVEL_1}
+enum Scene {MAIN_MENU, SETTINGS_MENU, CREDITS, LEVEL_1, LEVEL_2}
 
 const SCENES := {
 	Scene.MAIN_MENU: "uid://c14p3tv3084fc",
 	Scene.SETTINGS_MENU: "uid://bmn6dp2fgrq76",
 	Scene.CREDITS: "uid://c43wcx7i5vjej",
 	Scene.LEVEL_1: "uid://da3wyax0qgsew",
+	Scene.LEVEL_2: "uid://m3wdqb178x4o",
 }
 
 
