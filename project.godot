@@ -32,6 +32,12 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 
+[global_group]
+
+saveable=""
+persistent=""
+spawned=""
+
 [gui]
 
 theme/custom="uid://ddj8ug4cq20r3"

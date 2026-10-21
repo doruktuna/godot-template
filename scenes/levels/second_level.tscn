@@ -2,16 +2,27 @@
 
 [ext_resource type="Script" uid="uid://beu1v25wa6fai" path="res://scenes/levels/second_level.gd" id="1_0ivti"]
 [ext_resource type="PackedScene" uid="uid://bvcmylbm4efj1" path="res://entities/player/player.tscn" id="2_eio8w"]
+[ext_resource type="PackedScene" uid="uid://cqnjh6wnp3cbq" path="res://entities/objects/barrel_spawner/barrel_spawner.tscn" id="3_kwjvk"]
 [ext_resource type="PackedScene" uid="uid://dp8cc1v5hx4nq" path="res://ui/menus/pause_menu.tscn" id="3_y6m4c"]
+[ext_resource type="PackedScene" uid="uid://dhh07jophfsnr" path="res://entities/objects/barrel/barrel.tscn" id="4_eio8w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d67f2"]
 size = Vector2(93.5, 1061)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y6m4c"]
+size = Vector2(93.5, 4256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kwjvk"]
+size = Vector2(93.5, 4256)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0dwq"]
-size = Vector2(4175, 100.5)
+size = Vector2(2875, 100.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ivti"]
-size = Vector2(4171.5, 93)
+size = Vector2(2873.5, 93)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yl28m"]
+size = Vector2(2873.5, 93)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nbrbp"]
 size = Vector2(94, 350)
@@ -22,16 +33,21 @@ size = Vector2(94, 350)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hs8vu"]
 size = Vector2(92, 514)
 
-[node name="SecondLevel" type="Node2D" unique_id=1261555673]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_j5pnn"]
+bounce = 0.17
+
+[node name="SecondLevel" type="Node2D" unique_id=1261555673 groups=["saveable"]]
 script = ExtResource("1_0ivti")
 next_scene = 2
+metadata/_edit_horizontal_guides_ = [-447.0]
+metadata/_edit_vertical_guides_ = [4810.0]
 
 [node name="BG" type="ColorRect" parent="." unique_id=135236667]
-offset_left = -1731.0
-offset_top = -1282.0
-offset_right = 7852.0
-offset_bottom = 1159.0
-color = Color(0.8795506, 0.8289535, 0.97421974, 1)
+offset_left = -2687.0
+offset_top = -5921.0
+offset_right = 7329.0
+offset_bottom = 2052.0
+color = Color(0.8228257, 0.9275557, 0.95783097, 1)
 
 [node name="Walls" type="Node2D" parent="." unique_id=1877407374]
 
@@ -44,15 +60,59 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_top = -2.0
 offset_right = 96.0
-offset_bottom = 1076.0
+offset_bottom = 1078.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.4014601, 0.40146014, 0.40146002, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WestWall" unique_id=1349283210]
+visible = false
 position = Vector2(48.25, 533.5)
 shape = SubResource("RectangleShape2D_d67f2")
+
+[node name="WestWall2" type="StaticBody2D" parent="Walls" unique_id=2049511852]
+position = Vector2(1908, -447)
+
+[node name="ColorRect" type="ColorRect" parent="Walls/WestWall2" unique_id=1391558272]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -4273.0
+offset_right = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4014601, 0.40146014, 0.40146002, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WestWall2" unique_id=1078942757]
+visible = false
+position = Vector2(48.25, -1064)
+shape = SubResource("RectangleShape2D_y6m4c")
+
+[node name="EastWall" type="StaticBody2D" parent="Walls" unique_id=112872002]
+position = Vector2(3266, -4815)
+
+[node name="ColorRect" type="ColorRect" parent="Walls/EastWall" unique_id=1089103859]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = 8.0
+offset_right = 143.0
+offset_bottom = 4368.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4014601, 0.40146014, 0.40146002, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/EastWall" unique_id=1508836169]
+visible = false
+position = Vector2(48.25, -1064)
+shape = SubResource("RectangleShape2D_kwjvk")
 
 [node name="SouthWall" type="StaticBody2D" parent="Walls" unique_id=151894621]
 position = Vector2(-954, 434)
@@ -63,14 +123,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_right = 4181.0
-offset_bottom = 96.0
+offset_top = 5.0
+offset_right = 5765.0
+offset_bottom = 101.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.4, 0.4, 0.4, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/SouthWall" unique_id=116472199]
-position = Vector2(2084.5, 50.25)
+visible = false
+position = Vector2(1434.5, 50.25)
 shape = SubResource("RectangleShape2D_r0dwq")
 
 [node name="NorthWall" type="StaticBody2D" parent="Walls" unique_id=1310778223]
@@ -83,18 +145,64 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 2.0
-offset_right = 4104.0
+offset_top = -2.0
+offset_right = 2867.0
 offset_bottom = 96.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.4, 0.4, 0.4, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/NorthWall" unique_id=959775885]
-position = Vector2(2089.25, 47.5)
+visible = false
+position = Vector2(1440.25, 47.5)
 shape = SubResource("RectangleShape2D_0ivti")
 
+[node name="NorthWall2" type="StaticBody2D" parent="Walls" unique_id=367560213]
+position = Vector2(1906, -4817)
+
+[node name="ColorRect" type="ColorRect" parent="Walls/NorthWall2" unique_id=2096260285]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 1360.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/NorthWall2" unique_id=45991443]
+visible = false
+position = Vector2(1440.25, 47.5)
+shape = SubResource("RectangleShape2D_yl28m")
+
+[node name="NorthWall3" type="StaticBody2D" parent="Walls" unique_id=526100909]
+position = Vector2(3407, -544)
+
+[node name="ColorRect" type="ColorRect" parent="Walls/NorthWall3" unique_id=796197026]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 1402.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/NorthWall3" unique_id=2103531760]
+visible = false
+position = Vector2(1440.25, 47.5)
+shape = SubResource("RectangleShape2D_yl28m")
+
 [node name="NEWall" type="StaticBody2D" parent="Walls" unique_id=843610899]
-position = Vector2(3131, -543)
+position = Vector2(4847, -543)
 
 [node name="ColorRect" type="ColorRect" parent="Walls/NEWall" unique_id=438569954]
 anchors_preset = 8
@@ -102,18 +210,21 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_right = 96.0
+offset_left = -37.0
+offset_right = 59.0
 offset_bottom = 350.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.4, 0.4, 0.4, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/NEWall" unique_id=1626387714]
+visible = false
 position = Vector2(48, 175)
 shape = SubResource("RectangleShape2D_nbrbp")
 
 [node name="SEWall" type="StaticBody2D" parent="Walls" unique_id=520170612]
-position = Vector2(3131, 178)
+position = Vector2(4847, 178)
 
 [node name="ColorRect" type="ColorRect" parent="Walls/SEWall" unique_id=742497577]
 anchors_preset = 8
@@ -121,13 +232,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_right = 96.0
-offset_bottom = 350.0
+offset_left = -36.0
+offset_top = 2.0
+offset_right = 60.0
+offset_bottom = 352.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.4, 0.4, 0.4, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/SEWall" unique_id=2051607855]
+visible = false
 position = Vector2(48, 175)
 shape = SubResource("RectangleShape2D_eio8w")
 
@@ -141,31 +256,102 @@ offset_right = 1102.0
 offset_bottom = 77.0
 theme_type_variation = &"LevelLabel"
 text = "Second Level:
-Just go right"
+Save/Load Testing"
 horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Label2" type="Label" parent="Instructions" unique_id=1192472274]
 custom_minimum_size = Vector2(200, 0)
-offset_left = 1655.0
+offset_left = 1920.0
 offset_top = -85.0
-offset_right = 2935.0
-offset_bottom = 77.0
+offset_right = 3200.0
+offset_bottom = 163.0
 theme_type_variation = &"LevelLabel"
-text = "Pass through the gap
-and finish the game"
+text = "Explore upper room
+Use F11 and F12 to quick save/load
+Pause menu for regular save/load"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label6" type="Label" parent="Instructions" unique_id=1070885634]
+custom_minimum_size = Vector2(200, 0)
+offset_left = 3400.0
+offset_top = -36.0
+offset_right = 4680.0
+offset_bottom = 139.0
+theme_type_variation = &"LevelLabel"
+text = "Go right through the gap
+to finish the level"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="Instructions" unique_id=2099608784]
+custom_minimum_size = Vector2(200, 0)
+offset_left = 2018.0
+offset_top = -1111.0
+offset_right = 3298.0
+offset_bottom = -863.0
+theme_type_variation = &"LevelLabel"
+text = "Try your actions
+Then save and load"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label4" type="Label" parent="Instructions" unique_id=809385361]
+custom_minimum_size = Vector2(200, 0)
+offset_left = 2004.0
+offset_top = -2403.0
+offset_right = 3284.0
+offset_bottom = -1983.0
+theme_type_variation = &"LevelLabel"
+text = "Go ahead and hit the barrels
+First hit cracks them
+Second destroys them
+
+Then save/load 
+
+"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label5" type="Label" parent="Instructions" unique_id=1295038383]
+custom_minimum_size = Vector2(200, 0)
+offset_left = 1955.0
+offset_top = -3704.0
+offset_right = 3235.0
+offset_bottom = -3284.0
+theme_type_variation = &"LevelLabel"
+text = "This button spawns barrels
+Push it, 
+play with barrels
+
+Then save/load"
 horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="FinishArea" type="Area2D" parent="." unique_id=464684262]
 unique_name_in_owner = true
-position = Vector2(3223, 0)
+position = Vector2(4939, 0)
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FinishArea" unique_id=1831174770]
 shape = SubResource("RectangleShape2D_hs8vu")
 debug_color = Color(0.3335298, 0.6056067, 0.42073593, 0.41960785)
+
+[node name="Objects" type="Node2D" parent="." unique_id=1034720137]
+unique_name_in_owner = true
+
+[node name="Barrel" parent="Objects" unique_id=1590689736 instance=ExtResource("4_eio8w")]
+position = Vector2(2446, -2668)
+physics_material_override = SubResource("PhysicsMaterial_j5pnn")
+
+[node name="Barrel2" parent="Objects" unique_id=1718616510 instance=ExtResource("4_eio8w")]
+position = Vector2(2790, -2668)
+physics_material_override = SubResource("PhysicsMaterial_j5pnn")
+
+[node name="BarrelSpawner" parent="." unique_id=1811066065 instance=ExtResource("3_kwjvk")]
+position = Vector2(2606, -3917)
 
 [node name="Player" parent="." unique_id=595098128 instance=ExtResource("2_eio8w")]
 position = Vector2(3, -5)

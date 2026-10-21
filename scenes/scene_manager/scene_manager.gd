@@ -43,7 +43,7 @@ func instantiate_start_scene() -> void:
 
 	ResourceLoader.load_threaded_request(SCENES[start_scene])
 
-	var new_scene := await add_new_scene(start_scene)
+	var new_scene := await instantiate_new_scene(start_scene)
 	var original_mode := new_scene.process_mode
 	new_scene.process_mode = Node.PROCESS_MODE_DISABLED
 
@@ -64,7 +64,8 @@ func change_to_scene(scene: Scene, params: Dictionary) -> void:
 	get_tree().paused = true
 
 	# Reparent persistent objects to PersistObjects node so that they aren't freed
-	capture_persistent_objects()
+	if not params.has("load_data"):
+		capture_persistent_objects()
 
 	# This starts loading the new scene into memory
 	ResourceLoader.load_threaded_request(SCENES[scene])
@@ -75,30 +76,24 @@ func change_to_scene(scene: Scene, params: Dictionary) -> void:
 	await fade_out_animation()
 
 	# Add new scene and fade in from black
-	var new_scene := await add_new_scene(scene)
+	var new_scene := await instantiate_new_scene(scene)
 	var original_mode := new_scene.process_mode
 	new_scene.process_mode = Node.PROCESS_MODE_DISABLED
-
-	# Restore persistent objects to the new scene
-	restore_persistent_objects()
+	
+	# Restore persistent objects to the new scene (if its not loaded)
+	if not params.has("load_data"):
+		restore_persistent_objects()
 
 	# If its a load, set saveable objects' properties
 	if params and params.has("load_data"):
-		await SaveManager.load_saveable_nodes(params["load_data"])
+		SaveManager.load_saveable_nodes(params["load_data"])
 	
-	# Allow a frame to settle changes
-	new_scene.process_mode = original_mode
-	get_tree().paused = false
-	await get_tree().process_frame
-	await get_tree().process_frame
-	await get_tree().process_frame
-	new_scene.process_mode = Node.PROCESS_MODE_DISABLED
-	get_tree().paused = true
-
 	# Fade in and unpause the game
+	print("4")
 	await fade_in_animation()
 	new_scene.process_mode = original_mode
 	get_tree().paused = false
+	print("5")
 
 	cur_scene = scene
 
@@ -164,7 +159,7 @@ func remove_current_scene() -> void:
 		child.queue_free()
 
 
-func add_new_scene(scene: Scene) -> Node:
+func instantiate_new_scene(scene: Scene) -> Node:
 	var path: String = SCENES[scene]
 	
 	# Wait if necessary

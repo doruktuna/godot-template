@@ -4,8 +4,9 @@ extends CharacterBody2D
 const COLORS: Array[Color] = [Color.WHITE, Color.RED, Color.YELLOW, Color.REBECCA_PURPLE, Color.DARK_ORANGE]
 
 # TODO Revert high speed when testing is finished
-@export var speed: float = 300.0 * 3
+@export var speed: float = 600.0
 @export var speed_up_coef: float = 1000.0
+@export var push_force = 20.0
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
@@ -18,6 +19,14 @@ func _physics_process(delta: float) -> void:
 
 	velocity = velocity.move_toward(direction * speed, delta * speed_up_coef)
 	move_and_slide()
+
+	for i in get_slide_collision_count():
+		var c = get_slide_collision(i)
+		var collider = c.get_collider()
+		if collider is RigidBody2D:
+			collider.apply_central_impulse(-c.get_normal() * push_force)
+			if "hit" in collider:
+				collider.hit(self)
 
 
 func _input(event: InputEvent) -> void:
@@ -40,7 +49,7 @@ func end_persisting() -> void:
 	velocity = Vector2.ZERO
 
 
-func save() -> Dictionary:
+func save_state() -> Dictionary:
 	var data := {
 		"global_position": global_position,
 		"rotation": rotation,
@@ -50,7 +59,7 @@ func save() -> Dictionary:
 	return data
 
 
-func load(data: Dictionary) -> void:
+func load_state(data: Dictionary) -> void:
 	global_position = data["global_position"]
 	rotation = data["rotation"]
 	sprite.rotation = data["sprite_rotation"]

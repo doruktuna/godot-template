@@ -16,6 +16,8 @@ signal load_requested(file_path: String)
 signal quit_requested
 signal restart_requested
 signal level_completed
+signal node_removed(node_path: String)
+signal node_spawned(scene_path: String)
 
 # Debug signals
 signal previous_level_requested

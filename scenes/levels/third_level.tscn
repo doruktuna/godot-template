@@ -1,0 +1,189 @@
+[gd_scene format=3 uid="uid://bn6tjss1ukwb4"]
+
+[ext_resource type="Script" uid="uid://beu1v25wa6fai" path="res://scenes/levels/second_level.gd" id="1_etos1"]
+[ext_resource type="PackedScene" uid="uid://bvcmylbm4efj1" path="res://entities/player/player.tscn" id="2_yhvur"]
+[ext_resource type="PackedScene" uid="uid://dp8cc1v5hx4nq" path="res://ui/menus/pause_menu.tscn" id="3_0t2la"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d67f2"]
+size = Vector2(93.5, 1061)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0dwq"]
+size = Vector2(4175, 100.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ivti"]
+size = Vector2(4171.5, 93)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nbrbp"]
+size = Vector2(94, 350)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eio8w"]
+size = Vector2(94, 350)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hs8vu"]
+size = Vector2(92, 514)
+
+[node name="SecondLevel" type="Node2D" unique_id=1261555673]
+script = ExtResource("1_etos1")
+next_scene = 2
+
+[node name="BG" type="ColorRect" parent="." unique_id=135236667]
+offset_left = -1731.0
+offset_top = -1282.0
+offset_right = 7852.0
+offset_bottom = 1159.0
+color = Color(0.8795506, 0.8289535, 0.97421974, 1)
+
+[node name="Walls" type="Node2D" parent="." unique_id=1877407374]
+
+[node name="WestWall" type="StaticBody2D" parent="Walls" unique_id=1395951779]
+position = Vector2(-957, -543)
+
+[node name="ColorRect" type="ColorRect" parent="Walls/WestWall" unique_id=125119009]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 96.0
+offset_bottom = 1076.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4014601, 0.40146014, 0.40146002, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WestWall" unique_id=1349283210]
+position = Vector2(48.25, 533.5)
+shape = SubResource("RectangleShape2D_d67f2")
+
+[node name="SouthWall" type="StaticBody2D" parent="Walls" unique_id=151894621]
+position = Vector2(-954, 434)
+
+[node name="ColorRect" type="ColorRect" parent="Walls/SouthWall" unique_id=1343112534]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 4181.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/SouthWall" unique_id=116472199]
+position = Vector2(2084.5, 50.25)
+shape = SubResource("RectangleShape2D_r0dwq")
+
+[node name="NorthWall" type="StaticBody2D" parent="Walls" unique_id=1310778223]
+position = Vector2(-959, -543)
+
+[node name="ColorRect" type="ColorRect" parent="Walls/NorthWall" unique_id=338963444]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_right = 4104.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/NorthWall" unique_id=959775885]
+position = Vector2(2089.25, 47.5)
+shape = SubResource("RectangleShape2D_0ivti")
+
+[node name="NEWall" type="StaticBody2D" parent="Walls" unique_id=843610899]
+position = Vector2(3131, -543)
+
+[node name="ColorRect" type="ColorRect" parent="Walls/NEWall" unique_id=438569954]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 96.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/NEWall" unique_id=1626387714]
+position = Vector2(48, 175)
+shape = SubResource("RectangleShape2D_nbrbp")
+
+[node name="SEWall" type="StaticBody2D" parent="Walls" unique_id=520170612]
+position = Vector2(3131, 178)
+
+[node name="ColorRect" type="ColorRect" parent="Walls/SEWall" unique_id=742497577]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 96.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/SEWall" unique_id=2051607855]
+position = Vector2(48, 175)
+shape = SubResource("RectangleShape2D_eio8w")
+
+[node name="Instructions" type="Node2D" parent="." unique_id=492480505]
+
+[node name="Label" type="Label" parent="Instructions" unique_id=1707176360]
+custom_minimum_size = Vector2(200, 0)
+offset_left = -178.0
+offset_top = -85.0
+offset_right = 1102.0
+offset_bottom = 77.0
+theme_type_variation = &"LevelLabel"
+text = "Second Level:
+Save/Load Testing"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="Instructions" unique_id=1192472274]
+custom_minimum_size = Vector2(200, 0)
+offset_left = 1655.0
+offset_top = -85.0
+offset_right = 2935.0
+offset_bottom = 77.0
+theme_type_variation = &"LevelLabel"
+text = "Pass through the gap
+and finish the game"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label4" type="Label" parent="Instructions" unique_id=914660568]
+custom_minimum_size = Vector2(200, 0)
+offset_left = -638.0
+offset_top = -3265.0
+offset_right = 642.0
+offset_bottom = -3110.0
+theme_type_variation = &"LevelLabel"
+text = "You can save/load as well
+Use F11 and F12 for quick save/load
+Or use pause menu to save/load"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="FinishArea" type="Area2D" parent="." unique_id=464684262]
+unique_name_in_owner = true
+position = Vector2(3223, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishArea" unique_id=1831174770]
+shape = SubResource("RectangleShape2D_hs8vu")
+debug_color = Color(0.3335298, 0.6056067, 0.42073593, 0.41960785)
+
+[node name="Player" parent="." unique_id=595098128 instance=ExtResource("2_yhvur")]
+position = Vector2(3, -5)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=680209922]
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=739617311 instance=ExtResource("3_0t2la")]
+visible = false

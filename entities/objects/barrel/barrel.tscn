@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dhh07jophfsnr"]
+
+[ext_resource type="Script" uid="uid://cskrs5qlo2vfv" path="res://entities/objects/barrel/barrel.gd" id="1_3m5j0"]
+[ext_resource type="Texture2D" uid="uid://i5yqacvu4bf6" path="res://entities/objects/barrel/barrel.png" id="1_j5pnn"]
+[ext_resource type="Texture2D" uid="uid://bd07h7dda6mss" path="res://entities/objects/barrel/barrel-cracked.png" id="3_nr6rc"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gg6gs"]
+rough = true
+bounce = 0.13
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d67f2"]
+radius = 52.0
+height = 146.0
+
+[node name="Barrel" type="RigidBody2D" unique_id=1590689736 groups=["saveable"]]
+collision_layer = 8
+collision_mask = 15
+physics_material_override = SubResource("PhysicsMaterial_gg6gs")
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_3m5j0")
+normal_texture = ExtResource("1_j5pnn")
+cracked_texture = ExtResource("3_nr6rc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2046002980]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_j5pnn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=575301565]
+shape = SubResource("CapsuleShape2D_d67f2")
+
+[node name="InvulnerableTimer" type="Timer" parent="." unique_id=303689467]
+one_shot = true

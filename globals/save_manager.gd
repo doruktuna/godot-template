@@ -12,8 +12,11 @@ func _on_save_requested(file_path: String, cur_scene: SceneManager.Scene) -> voi
 	var data: Dictionary = {"cur_scene": cur_scene}
 	var saveable_nodes := get_tree().get_nodes_in_group("saveable")
 	for sn in saveable_nodes:
-		data[sn.get_path()] = sn.save()
-	print("Save data: ", data)
+		if not sn.is_in_group("spawned"):
+			data[sn.get_path()] = sn.save_state()
+	print("Save data: ")
+	print(JSON.stringify(data, "  "))
+	print()
 	save_data(file_path, data)
 
 
@@ -24,10 +27,11 @@ func _on_load_requested(file_path: String) -> void:
 
 	
 func load_saveable_nodes(data: Dictionary) -> void:
+	print("Load saveables")
 	var saveable_nodes := get_tree().get_nodes_in_group("saveable")
 	for sn in saveable_nodes:
 		if sn.get_path() in data:
-			sn.load(data[sn.get_path()])
+			sn.load_state(data[sn.get_path()])
 
 
 func save_data(file_path: String, data: Dictionary) -> bool:
