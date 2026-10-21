@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://b3kqym2kh3rdq" path="res://scenes/levels/start_level.gd" id="1_lps7v"]
 [ext_resource type="PackedScene" uid="uid://bvcmylbm4efj1" path="res://entities/player/player.tscn" id="3_4b4lo"]
-[ext_resource type="PackedScene" uid="uid://cqnjh6wnp3cbq" path="res://entities/objects/barrel_spawner/barrel_spawner.tscn" id="4_25ioe"]
 [ext_resource type="PackedScene" uid="uid://dp8cc1v5hx4nq" path="res://ui/menus/pause_menu.tscn" id="4_r0dwq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d67f2"]
@@ -192,9 +191,6 @@ metadata/_edit_use_anchors_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/NEWall" unique_id=1381117469]
 position = Vector2(-118, -0.5)
 shape = SubResource("RectangleShape2D_8bnrt")
-
-[node name="BarrelSpawner" parent="." unique_id=1811066065 instance=ExtResource("4_25ioe")]
-position = Vector2(-228, -118)
 
 [node name="FinishArea" type="Area2D" parent="." unique_id=464684262]
 unique_name_in_owner = true
