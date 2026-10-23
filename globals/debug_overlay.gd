@@ -60,3 +60,4 @@ func capture_and_update_ss() -> void:
 	var image := get_viewport().get_texture().get_image()
 	if image != null:
 		ss_texture_rect.texture = ImageTexture.create_from_image(image)
+		SaveManager.save_image("debug_ss", image)

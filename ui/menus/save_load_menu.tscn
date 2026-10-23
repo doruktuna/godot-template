@@ -1,0 +1,157 @@
+[gd_scene format=3 uid="uid://ctk1se0iaam4d"]
+
+[ext_resource type="Script" uid="uid://cmqdb4ar25058" path="res://ui/menus/save_load_menu.gd" id="1_7c7c6"]
+[ext_resource type="PackedScene" uid="uid://b86aoim6f5a55" path="res://ui/components/save_load_slot.tscn" id="2_gq01y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6tukj"]
+bg_color = Color(0.17017019, 0.40820655, 0.5342361, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_d67f2"]
+color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5jabl"]
+
+[node name="SaveLoadMenu" type="Control" unique_id=739617311]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7c7c6")
+
+[node name="Panel" type="Panel" parent="." unique_id=2009740028]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6tukj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1011345062]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.05
+anchor_right = 0.9
+anchor_bottom = 0.95
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="SaveLoadLabel" type="Label" parent="VBoxContainer" unique_id=1495620462]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"MenuLabel"
+text = "Save/Load Game"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=1269894766]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_d67f2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=1472013608]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer" unique_id=334086931]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="SaveSlot1" parent="VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1322286490 instance=ExtResource("2_gq01y")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../../HBoxContainer2/QuicksaveSlot")
+focus_neighbor_top = NodePath("../../../CenterContainer/CancelButton")
+focus_neighbor_right = NodePath("../SaveSlot2")
+focus_neighbor_bottom = NodePath("../../HBoxContainer2/AutosaveSlot")
+focus_next = NodePath("../SaveSlot2")
+focus_previous = NodePath("../../HBoxContainer2/QuicksaveSlot")
+
+[node name="SaveSlot2" parent="VBoxContainer/VBoxContainer/HBoxContainer" unique_id=940865356 instance=ExtResource("2_gq01y")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../SaveSlot1")
+focus_neighbor_top = NodePath("../../../CenterContainer/CancelButton")
+focus_neighbor_right = NodePath("../SaveSlot3")
+focus_neighbor_bottom = NodePath("../../HBoxContainer2/AutosaveSlot")
+focus_next = NodePath("../SaveSlot3")
+focus_previous = NodePath("../SaveSlot1")
+
+[node name="SaveSlot3" parent="VBoxContainer/VBoxContainer/HBoxContainer" unique_id=943752104 instance=ExtResource("2_gq01y")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../SaveSlot2")
+focus_neighbor_top = NodePath("../../../CenterContainer/CancelButton")
+focus_neighbor_right = NodePath("../../HBoxContainer2/AutosaveSlot")
+focus_neighbor_bottom = NodePath("../../HBoxContainer2/QuicksaveSlot")
+focus_next = NodePath("../../HBoxContainer2/AutosaveSlot")
+focus_previous = NodePath("../SaveSlot2")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/VBoxContainer" unique_id=242299070]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Spacer" type="Control" parent="VBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1598450140]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="AutosaveSlot" parent="VBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1186922799 instance=ExtResource("2_gq01y")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../../HBoxContainer/SaveSlot3")
+focus_neighbor_top = NodePath("../../HBoxContainer/SaveSlot1")
+focus_neighbor_right = NodePath("../QuicksaveSlot")
+focus_neighbor_bottom = NodePath("../../../CenterContainer/CancelButton")
+focus_next = NodePath("../QuicksaveSlot")
+focus_previous = NodePath("../../HBoxContainer/SaveSlot3")
+
+[node name="QuicksaveSlot" parent="VBoxContainer/VBoxContainer/HBoxContainer2" unique_id=967533641 instance=ExtResource("2_gq01y")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../AutosaveSlot")
+focus_neighbor_top = NodePath("../../HBoxContainer/SaveSlot2")
+focus_neighbor_right = NodePath("../../HBoxContainer/SaveSlot1")
+focus_neighbor_bottom = NodePath("../../../CenterContainer/CancelButton")
+focus_next = NodePath("../../HBoxContainer/SaveSlot1")
+focus_previous = NodePath("../AutosaveSlot")
+
+[node name="Spacer2" type="Control" parent="VBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1677750769]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer" unique_id=1967766917]
+layout_mode = 2
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxFlat_5jabl")
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer" unique_id=1160286921]
+layout_mode = 2
+
+[node name="CancelButton" type="Button" parent="VBoxContainer/CenterContainer" unique_id=1044190146]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_left = NodePath("../../VBoxContainer/HBoxContainer2/QuicksaveSlot")
+focus_neighbor_top = NodePath("../../VBoxContainer/HBoxContainer2/QuicksaveSlot")
+focus_neighbor_right = NodePath("../../VBoxContainer/HBoxContainer/SaveSlot1")
+focus_neighbor_bottom = NodePath("../../VBoxContainer/HBoxContainer/SaveSlot1")
+focus_next = NodePath("../../VBoxContainer/HBoxContainer/SaveSlot1")
+focus_previous = NodePath("../../VBoxContainer/HBoxContainer2/QuicksaveSlot")
+theme_type_variation = &"MenuRejectButton"
+text = "CANCEL"

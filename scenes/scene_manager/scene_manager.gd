@@ -32,7 +32,8 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("quick_save"):
-		EventBus.save_requested.emit("quick_save", cur_scene)
+		var image := await capture_snapshot()
+		EventBus.save_requested.emit("quick_save", cur_scene, image)
 
 	if event.is_action_pressed("quick_load"):
 		EventBus.load_requested.emit("quick_save")
@@ -173,3 +174,15 @@ func instantiate_new_scene(scene: Scene) -> Node:
 	scene_container.add_child(new_scene)
 
 	return new_scene
+
+
+func capture_snapshot() -> Image:
+	# TODO Hide pause menu (or even better full canvas layer) here for normal saves
+	# Wait the frame draw in order not to capture unfinished frames
+	await RenderingServer.frame_post_draw
+	var image := get_viewport().get_texture().get_image()
+	if image != null:
+		snapshot.texture = ImageTexture.create_from_image(image)
+		snapshot.show()
+
+	return image
