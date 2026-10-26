@@ -119,6 +119,13 @@ func load_data(filename: String) -> Dictionary:
 		return {}
 
 	# TODO Add version migration while loading
+	return _migrate(data)
+
+
+func _migrate(data: Dictionary) -> Dictionary:
+	# Add migration steps in between when the save version changes
+	var _old_version: int = data["version"]
+	data["version"] = SAVE_VERSION
 	return data
 
 
