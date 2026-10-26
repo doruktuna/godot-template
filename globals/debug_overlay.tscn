@@ -70,11 +70,6 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "RESTART"
 
-[node name="PreviousLevelButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1317810591]
-unique_name_in_owner = true
-layout_mode = 2
-text = "PREVIOUS LEVEL"
-
 [node name="NextLevelButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1018444951]
 unique_name_in_owner = true
 layout_mode = 2

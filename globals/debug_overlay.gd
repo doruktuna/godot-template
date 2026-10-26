@@ -21,7 +21,6 @@ func _ready() -> void:
 
 func connect_button_signals() -> void:
 	restart_button.pressed.connect(func(): EventBus.restart_requested.emit())
-	previous_level_button.pressed.connect(func(): EventBus.previous_level_requested.emit())
 	next_level_button.pressed.connect(func(): EventBus.next_level_requested.emit())
 	main_menu_button.pressed.connect(_on_main_menu_pressed)
 	quit_button.pressed.connect(func(): EventBus.quit_requested.emit())

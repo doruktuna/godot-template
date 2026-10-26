@@ -35,8 +35,8 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("quick_save"):
-		var image := await capture_snapshot()
-		EventBus.save_requested.emit("quick_save", cur_scene, image)
+		await SaveManager.capture_thumbnail()
+		EventBus.save_requested.emit("quick_save", cur_scene)
 
 	if event.is_action_pressed("quick_load"):
 		EventBus.load_requested.emit("quick_save")
@@ -103,8 +103,8 @@ func change_to_scene(scene: Scene, params: Dictionary) -> void:
 	# Autosave level if not loaded
 	await get_tree().process_frame
 	if scene in LEVEL_SCENES and not params.has("load_data"):
-		var image := await capture_snapshot()
-		EventBus.save_requested.emit("auto_save", cur_scene, image)
+		await SaveManager.capture_thumbnail()
+		EventBus.save_requested.emit("auto_save", cur_scene)
 
 	
 func capture_persistent_objects() -> void:

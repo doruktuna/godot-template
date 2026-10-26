@@ -1,4 +1,3 @@
-# TODO Create a Level scene and instantiate levels from that scene, so that required nodes exists (finish_area and pause_menu)
 class_name Level
 extends Node
 
@@ -16,8 +15,6 @@ func _ready() -> void:
 	EventBus.quit_requested.connect(func(): get_tree().quit())
 	EventBus.restart_requested.connect(_on_restart_requested)
 	EventBus.node_removed.connect(_on_node_freed)
-	EventBus.hide_menus_requested.connect(_on_hide_menus_requested)
-	EventBus.show_menus_requested.connect(_on_show_menus_requested)
 
 	pause_menu.resume_requested.connect(_on_resume_requested)
 	pause_menu.main_menu_requested.connect(_on_main_menu_requested)
@@ -109,11 +106,3 @@ func restore_spawned_nodes(spawned_nodes: Array) -> void:
 		parent.add_child(node)
 		node.load_state(entry.data)
 		node.add_to_group("spawned")
-
-
-func _on_hide_menus_requested() -> void:
-	pause_menu.hide()
-
-
-func _on_show_menus_requested() -> void:
-	pause_menu.show()

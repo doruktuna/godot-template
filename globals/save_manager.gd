@@ -4,13 +4,20 @@ const SAVE_VERSION := 1
 
 const SAVE_INFOS_FILE := "user://save_infos.dat"
 
+var game_thumbnail: Image
+
 
 func _ready() -> void:
 	EventBus.save_requested.connect(_on_save_requested)
 	EventBus.load_requested.connect(_on_load_requested)
 
 
-func _on_save_requested(filename: String, cur_scene: SceneManager.Scene, image: Image) -> void:
+func capture_thumbnail() -> void:
+	await RenderingServer.frame_post_draw
+	game_thumbnail = get_viewport().get_texture().get_image()
+
+
+func _on_save_requested(filename: String, cur_scene: SceneManager.Scene) -> void:
 	var data: Dictionary = {"cur_scene": cur_scene}
 	var saveable_nodes := get_tree().get_nodes_in_group("saveable")
 	for sn in saveable_nodes:
@@ -18,9 +25,9 @@ func _on_save_requested(filename: String, cur_scene: SceneManager.Scene, image: 
 			data[sn.get_path()] = sn.save_state()
 
 	save_data(filename, data)
-	if image != null:
-		save_image(filename, image)
-	update_save_info(filename, image != null)
+	if game_thumbnail != null:
+		save_image(filename, game_thumbnail)
+	update_save_info(filename, game_thumbnail != null)
 
 
 func _on_load_requested(filename: String) -> void:

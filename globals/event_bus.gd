@@ -18,11 +18,8 @@ signal restart_requested
 signal level_completed
 signal node_removed(node_path: String)
 signal node_spawned(scene_path: String)
-signal hide_menus_requested()
-signal show_menus_requested()
 
 # Debug signals
-signal previous_level_requested
 signal next_level_requested
 
 @warning_ignore_restore("unused_signal")

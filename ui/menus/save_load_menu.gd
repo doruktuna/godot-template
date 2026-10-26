@@ -58,15 +58,5 @@ func _on_save_load_slot_clicked(slot: SaveLoadSlot) -> void:
 
 
 func save_game(filename: String) -> void:
-	EventBus.hide_menus_requested.emit()
-	await get_tree().process_frame
-	var image: Image = await capture_snapshot()
-	EventBus.save_requested.emit(filename, SceneManager.cur_scene, image)
+	EventBus.save_requested.emit(filename, SceneManager.cur_scene)
 	setup_slots(is_load_screen)
-	EventBus.show_menus_requested.emit()
-
-
-func capture_snapshot() -> Image:
-	# Wait the frame draw in order not to capture unfinished frames
-	await RenderingServer.frame_post_draw
-	return get_viewport().get_texture().get_image()

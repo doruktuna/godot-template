@@ -31,6 +31,9 @@ func _input(event: InputEvent) -> void:
 
 
 func show_menu() -> void:
+	# Capture the game frame before opening the menu (will be used if game is saved)
+	await SaveManager.capture_thumbnail()
+
 	show()
 	resume_button.grab_focus()
 
