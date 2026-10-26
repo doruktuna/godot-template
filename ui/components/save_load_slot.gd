@@ -10,6 +10,7 @@ extends Control
 signal save_load_slot_clicked(slot: SaveLoadSlot)
 
 var is_enabled := true
+var filename: String
 
 
 func _ready() -> void:
@@ -18,8 +19,9 @@ func _ready() -> void:
 	_forward_focus_neighbors()
 
 
-func setup(slot_name: String, ss_texture: Texture2D = null, slot_date: String = "") -> void:
+func setup(slot_name: String, filename_inp: String, ss_texture: Texture2D = null, slot_date: String = "") -> void:
 	save_load_name.text = slot_name
+	filename = filename_inp
 	if ss_texture:
 		game_ss.texture = ss_texture
 	save_load_date.text = slot_date

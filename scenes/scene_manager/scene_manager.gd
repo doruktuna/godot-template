@@ -24,7 +24,7 @@ const SCENES := {
 	Scene.LEVEL_3: "uid://bn6tjss1ukwb4",
 }
 
-var cur_scene: Scene
+static var cur_scene: Scene
 
 
 func _ready() -> void:

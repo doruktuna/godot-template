@@ -154,4 +154,4 @@ focus_neighbor_bottom = NodePath("../../VBoxContainer/HBoxContainer/SaveSlot1")
 focus_next = NodePath("../../VBoxContainer/HBoxContainer/SaveSlot1")
 focus_previous = NodePath("../../VBoxContainer/HBoxContainer2/QuicksaveSlot")
 theme_type_variation = &"MenuRejectButton"
-text = "CANCEL"
+text = "DISCARD"

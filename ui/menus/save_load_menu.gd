@@ -16,6 +16,8 @@ extends Control
 
 signal save_load_canceled()
 
+var is_load_screen: bool
+
 
 func _ready() -> void:
 	setup_slots()
@@ -23,12 +25,13 @@ func _ready() -> void:
 	cancel_button.pressed.connect(save_load_canceled.emit)
 
 
-func setup_slots(is_load_screen = false) -> void:
+func setup_slots(is_load_screen_inp := false) -> void:
+	is_load_screen = is_load_screen_inp
 	var save_infos: Dictionary = SaveManager.get_save_infos()
 	print("Save infos: ", JSON.stringify(save_infos, "  "))
 
 	save_load_label.text = "Load Game" if is_load_screen else "Save Game"
-	for filename in save_slots:
+	for filename: String in save_slots:
 		var is_save_exists = SaveManager.is_save_exists(filename)
 		var title: String = save_slots[filename].title
 		var slot: SaveLoadSlot = save_slots[filename].slot
@@ -39,7 +42,34 @@ func setup_slots(is_load_screen = false) -> void:
 			var date = save_infos[filename].date
 			var time = save_infos[filename].time
 			var date_str = "%s/%s/%s, %2d:%2d" % [date["day"], date["month"], date["year"], time["hour"], time["minute"]]
-			slot.setup(title, image_texture, date_str)
+			slot.setup(title, filename, image_texture, date_str)
 		else:
-			slot.setup(title)
+			slot.setup(title, filename)
 			slot.set_enabled(not is_load_screen) # If save doesn't exist and it's load screen
+
+		if not slot.save_load_slot_clicked.is_connected(_on_save_load_slot_clicked):
+			slot.save_load_slot_clicked.connect(_on_save_load_slot_clicked)
+
+
+func _on_save_load_slot_clicked(slot: SaveLoadSlot) -> void:
+	print("Slot clicked: ", slot.filename)
+
+	if is_load_screen:
+		pass
+	else:
+		save_game(slot.filename)
+
+
+func save_game(filename: String) -> void:
+	EventBus.hide_menus_requested.emit()
+	await get_tree().process_frame
+	var image: Image = await capture_snapshot()
+	EventBus.save_requested.emit(filename, SceneManager.cur_scene, image)
+	setup_slots(is_load_screen)
+	EventBus.show_menus_requested.emit()
+
+
+func capture_snapshot() -> Image:
+	# Wait the frame draw in order not to capture unfinished frames
+	await RenderingServer.frame_post_draw
+	return get_viewport().get_texture().get_image()
