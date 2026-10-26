@@ -1,8 +1,9 @@
 class_name SaveLoadMenu
 extends Control
 
-@onready var save_load_label: Label = %SaveLoadLabel
+@export var is_load_screen: bool = false
 
+@onready var save_load_label: Label = %SaveLoadLabel
 
 @onready var save_slots = {
 	"save_1" = {"title": "Save 1", "slot": %SaveSlot1},
@@ -16,11 +17,9 @@ extends Control
 
 signal save_load_canceled()
 
-var is_load_screen: bool
-
 
 func _ready() -> void:
-	setup_slots()
+	setup_slots(is_load_screen)
 	save_slots.save_1.slot.grab_focus()
 	cancel_button.pressed.connect(save_load_canceled.emit)
 
@@ -41,7 +40,7 @@ func setup_slots(is_load_screen_inp := false) -> void:
 			var image_texture := ImageTexture.create_from_image(image)
 			var date = save_infos[filename].date
 			var time = save_infos[filename].time
-			var date_str = "%s/%s/%s, %2d:%2d" % [date["day"], date["month"], date["year"], time["hour"], time["minute"]]
+			var date_str = "%02d/%02d/%s, %02d:%02d" % [date["day"], date["month"], date["year"], time["hour"], time["minute"]]
 			slot.setup(title, filename, image_texture, date_str)
 		else:
 			slot.setup(title, filename)
@@ -52,10 +51,8 @@ func setup_slots(is_load_screen_inp := false) -> void:
 
 
 func _on_save_load_slot_clicked(slot: SaveLoadSlot) -> void:
-	print("Slot clicked: ", slot.filename)
-
 	if is_load_screen:
-		pass
+		EventBus.load_requested.emit(slot.filename)
 	else:
 		save_game(slot.filename)
 

@@ -38,7 +38,7 @@ bounce = 0.17
 
 [node name="SecondLevel" type="Node2D" unique_id=1261555673 groups=["saveable"]]
 script = ExtResource("1_0ivti")
-next_scene = 5
+next_scene = 6
 metadata/_edit_horizontal_guides_ = [-447.0]
 metadata/_edit_vertical_guides_ = [4810.0]
 

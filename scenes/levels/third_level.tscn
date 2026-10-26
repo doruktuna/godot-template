@@ -24,7 +24,7 @@ size = Vector2(92, 514)
 
 [node name="ThirdLevel" type="Node2D" unique_id=1261555673]
 script = ExtResource("1_etos1")
-next_scene = 2
+next_scene = 3
 
 [node name="BG" type="ColorRect" parent="." unique_id=135236667]
 offset_left = -1731.0

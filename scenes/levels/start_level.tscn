@@ -8,7 +8,7 @@
 size = Vector2(97, 4009)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nbrbp"]
-size = Vector2(96, 3971)
+size = Vector2(96, 4004)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0dwq"]
 size = Vector2(1696, 97)
@@ -24,7 +24,7 @@ size = Vector2(584, 88)
 
 [node name="StartLevel" type="Node2D" unique_id=1261555673 groups=["saveable"]]
 script = ExtResource("1_lps7v")
-next_scene = 4
+next_scene = 5
 
 [node name="BG" type="ColorRect" parent="." unique_id=135236667]
 offset_left = -1731.0
@@ -95,7 +95,7 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -48.0
-offset_top = -3766.0
+offset_top = -3767.0
 offset_right = 48.0
 offset_bottom = 244.0
 grow_horizontal = 2
@@ -124,7 +124,7 @@ grow_vertical = 2
 color = Color(0.4, 0.4, 0.4, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/EastWall" unique_id=1626387714]
-position = Vector2(1, -1749.5)
+position = Vector2(1, -1766)
 shape = SubResource("RectangleShape2D_nbrbp")
 
 [node name="SouthWall" type="StaticBody2D" parent="Walls" unique_id=151894621]
@@ -157,9 +157,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -404.0
+offset_left = -405.0
 offset_top = -48.0
-offset_right = 171.0
+offset_right = 170.0
 offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -179,9 +179,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -404.0
+offset_left = -405.0
 offset_top = -48.0
-offset_right = 168.0
+offset_right = 167.0
 offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
