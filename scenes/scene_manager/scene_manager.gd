@@ -13,6 +13,8 @@ extends Node
 
 enum Scene {MAIN_MENU, SETTINGS_MENU, CREDITS, LEVEL_1, LEVEL_2, LEVEL_3}
 
+const LEVEL_SCENES: Array[Scene] = [Scene.LEVEL_1, Scene.LEVEL_2, Scene.LEVEL_3]
+
 const SCENES := {
 	Scene.MAIN_MENU: "uid://c14p3tv3084fc",
 	Scene.SETTINGS_MENU: "uid://bmn6dp2fgrq76",
@@ -91,17 +93,20 @@ func change_to_scene(scene: Scene, params: Dictionary) -> void:
 		SaveManager.load_saveable_nodes(params["load_data"])
 	
 	# Fade in and unpause the game
-	print("4")
 	await fade_in_animation()
 	new_scene.process_mode = original_mode
 	get_tree().paused = false
-	print("5")
 
 	cur_scene = scene
 
+	# Autosave level if not loaded
+	await get_tree().process_frame
+	if scene in LEVEL_SCENES and not params.has("load_data"):
+		var image := await capture_snapshot()
+		EventBus.save_requested.emit("auto_save", cur_scene, image)
+
 	
 func capture_persistent_objects() -> void:
-	print("CAPTURING PERSISTENT OBJECTS")
 	var persistent_nodes := get_tree().get_nodes_in_group("persistent")
 	for pn in persistent_nodes:
 		pn.start_persisting()
