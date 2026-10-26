@@ -1,44 +1,41 @@
-[gd_scene format=3 uid="uid://bn6tjss1ukwb4"]
+[gd_scene format=3 uid="uid://d0vurqouf2wck"]
 
-[ext_resource type="Script" uid="uid://beu1v25wa6fai" path="res://scenes/levels/second_level.gd" id="1_etos1"]
-[ext_resource type="PackedScene" uid="uid://bvcmylbm4efj1" path="res://entities/player/player.tscn" id="2_yhvur"]
-[ext_resource type="PackedScene" uid="uid://dp8cc1v5hx4nq" path="res://ui/menus/pause_menu.tscn" id="3_0t2la"]
+[ext_resource type="PackedScene" uid="uid://de64e8chgm8li" path="res://scenes/levels/level.tscn" id="1_dwlld"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d67f2"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dwlld"]
 size = Vector2(93.5, 1061)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0dwq"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p74rn"]
 size = Vector2(4175, 100.5)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ivti"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_etos1"]
 size = Vector2(4171.5, 93)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nbrbp"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yhvur"]
 size = Vector2(94, 350)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_eio8w"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0t2la"]
 size = Vector2(94, 350)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hs8vu"]
-size = Vector2(92, 514)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ivti"]
+size = Vector2(100, 500)
 
-[node name="ThirdLevel" type="Node2D" unique_id=1261555673]
-script = ExtResource("1_etos1")
+[node name="ThirdLevel" unique_id=1196016232 instance=ExtResource("1_dwlld")]
 next_scene = 3
 
-[node name="BG" type="ColorRect" parent="." unique_id=135236667]
+[node name="BG" type="ColorRect" parent="." index="0" unique_id=1272601949]
 offset_left = -1731.0
 offset_top = -1282.0
 offset_right = 7852.0
 offset_bottom = 1159.0
 color = Color(0.9927792, 0.8328498, 0.75576556, 1)
 
-[node name="Walls" type="Node2D" parent="." unique_id=1877407374]
+[node name="Walls" type="Node2D" parent="." index="1" unique_id=2075783993]
 
-[node name="WestWall" type="StaticBody2D" parent="Walls" unique_id=1395951779]
+[node name="WestWall" type="StaticBody2D" parent="Walls" index="0" unique_id=1408736772]
 position = Vector2(-957, -543)
 
-[node name="ColorRect" type="ColorRect" parent="Walls/WestWall" unique_id=125119009]
+[node name="ColorRect" type="ColorRect" parent="Walls/WestWall" index="0" unique_id=73272077]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -50,14 +47,14 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.4014601, 0.40146014, 0.40146002, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WestWall" unique_id=1349283210]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WestWall" index="1" unique_id=172470380]
 position = Vector2(48.25, 533.5)
-shape = SubResource("RectangleShape2D_d67f2")
+shape = SubResource("RectangleShape2D_dwlld")
 
-[node name="SouthWall" type="StaticBody2D" parent="Walls" unique_id=151894621]
+[node name="SouthWall" type="StaticBody2D" parent="Walls" index="1" unique_id=24762871]
 position = Vector2(-954, 434)
 
-[node name="ColorRect" type="ColorRect" parent="Walls/SouthWall" unique_id=1343112534]
+[node name="ColorRect" type="ColorRect" parent="Walls/SouthWall" index="0" unique_id=1528250098]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -69,14 +66,14 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.4, 0.4, 0.4, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/SouthWall" unique_id=116472199]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/SouthWall" index="1" unique_id=470551408]
 position = Vector2(2084.5, 50.25)
-shape = SubResource("RectangleShape2D_r0dwq")
+shape = SubResource("RectangleShape2D_p74rn")
 
-[node name="NorthWall" type="StaticBody2D" parent="Walls" unique_id=1310778223]
+[node name="NorthWall" type="StaticBody2D" parent="Walls" index="2" unique_id=1254253459]
 position = Vector2(-959, -543)
 
-[node name="ColorRect" type="ColorRect" parent="Walls/NorthWall" unique_id=338963444]
+[node name="ColorRect" type="ColorRect" parent="Walls/NorthWall" index="0" unique_id=2022704678]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -89,14 +86,14 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.4, 0.4, 0.4, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/NorthWall" unique_id=959775885]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/NorthWall" index="1" unique_id=941914650]
 position = Vector2(2089.25, 47.5)
-shape = SubResource("RectangleShape2D_0ivti")
+shape = SubResource("RectangleShape2D_etos1")
 
-[node name="NEWall" type="StaticBody2D" parent="Walls" unique_id=843610899]
+[node name="NEWall" type="StaticBody2D" parent="Walls" index="3" unique_id=743448341]
 position = Vector2(3131, -543)
 
-[node name="ColorRect" type="ColorRect" parent="Walls/NEWall" unique_id=438569954]
+[node name="ColorRect" type="ColorRect" parent="Walls/NEWall" index="0" unique_id=448227861]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -108,14 +105,14 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.4, 0.4, 0.4, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/NEWall" unique_id=1626387714]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/NEWall" index="1" unique_id=898751516]
 position = Vector2(48, 175)
-shape = SubResource("RectangleShape2D_nbrbp")
+shape = SubResource("RectangleShape2D_yhvur")
 
-[node name="SEWall" type="StaticBody2D" parent="Walls" unique_id=520170612]
+[node name="SEWall" type="StaticBody2D" parent="Walls" index="4" unique_id=1389761268]
 position = Vector2(3131, 178)
 
-[node name="ColorRect" type="ColorRect" parent="Walls/SEWall" unique_id=742497577]
+[node name="ColorRect" type="ColorRect" parent="Walls/SEWall" index="0" unique_id=303506028]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -127,13 +124,13 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.4, 0.4, 0.4, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/SEWall" unique_id=2051607855]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/SEWall" index="1" unique_id=1930361436]
 position = Vector2(48, 175)
-shape = SubResource("RectangleShape2D_eio8w")
+shape = SubResource("RectangleShape2D_0t2la")
 
-[node name="Instructions" type="Node2D" parent="." unique_id=492480505]
+[node name="Instructions" type="Node2D" parent="." index="2" unique_id=1471127163]
 
-[node name="Label" type="Label" parent="Instructions" unique_id=1707176360]
+[node name="Label" type="Label" parent="Instructions" index="0" unique_id=1902080271]
 custom_minimum_size = Vector2(200, 0)
 offset_left = -178.0
 offset_top = -85.0
@@ -145,7 +142,7 @@ End Game"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Label2" type="Label" parent="Instructions" unique_id=1192472274]
+[node name="Label2" type="Label" parent="Instructions" index="1" unique_id=815725511]
 custom_minimum_size = Vector2(200, 0)
 offset_left = 1655.0
 offset_top = -85.0
@@ -157,7 +154,7 @@ and finish the game"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Label4" type="Label" parent="Instructions" unique_id=914660568]
+[node name="Label4" type="Label" parent="Instructions" index="2" unique_id=937617344]
 custom_minimum_size = Vector2(200, 0)
 offset_left = -638.0
 offset_top = -3265.0
@@ -170,20 +167,5 @@ Or use pause menu to save/load"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="FinishArea" type="Area2D" parent="." unique_id=464684262]
-unique_name_in_owner = true
-position = Vector2(3223, 0)
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishArea" unique_id=1831174770]
-shape = SubResource("RectangleShape2D_hs8vu")
-debug_color = Color(0.3335298, 0.6056067, 0.42073593, 0.41960785)
-
-[node name="Player" parent="." unique_id=595098128 instance=ExtResource("2_yhvur")]
-position = Vector2(3, -5)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=680209922]
-
-[node name="PauseMenu" parent="CanvasLayer" unique_id=739617311 instance=ExtResource("3_0t2la")]
-visible = false
+[node name="CollisionShape2D" parent="FinishArea" parent_id_path=PackedInt32Array(1693427938) index="0" unique_id=1119043868]
+shape = SubResource("RectangleShape2D_0ivti")

@@ -3,7 +3,6 @@ extends CharacterBody2D
 
 const COLORS: Array[Color] = [Color.WHITE, Color.RED, Color.YELLOW, Color.REBECCA_PURPLE, Color.DARK_ORANGE]
 
-# TODO Revert high speed when testing is finished
 @export var speed: float = 600.0
 @export var speed_up_coef: float = 1000.0
 @export var push_force = 20.0

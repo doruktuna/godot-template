@@ -118,7 +118,6 @@ func load_data(filename: String) -> Dictionary:
 		push_error("Save file is corrupt or not a dictionary")
 		return {}
 
-	# TODO Add version migration while loading
 	return _migrate(data)
 
 

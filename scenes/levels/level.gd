@@ -52,17 +52,14 @@ func _on_main_menu_requested() -> void:
 
 
 func _on_finish_area_body_entered(body: Node2D) -> void:
-	print("FINISH AREA ENTERED: ", self, ", ", body)
 	EventBus.scene_change_requested.emit(next_scene, {})
 
 
 func _on_node_freed(node_path: String) -> void:
-	print("Node freed: ", node_path)
 	removed_nodes.append(node_path)
 
 
 func save_state() -> Dictionary:
-	print("Level save")
 	var spawned_nodes = get_spawned_nodes()
 	var data := {
 		"removed": removed_nodes,
@@ -84,7 +81,7 @@ func free_removed_nodes(freed_node_paths: Array[String]) -> void:
 		if node:
 			node.queue_free()
 
-# TODO Its a better idea to migrate all this logic into SaveManager
+
 func get_spawned_nodes() -> Array:
 	var spawned_nodes: Array = []
 	for i_node in get_tree().get_nodes_in_group("spawned"):

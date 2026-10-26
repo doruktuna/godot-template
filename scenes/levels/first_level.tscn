@@ -1,0 +1,195 @@
+[gd_scene format=3 uid="uid://bdpm0g4m86lvk"]
+
+[ext_resource type="PackedScene" uid="uid://de64e8chgm8li" path="res://scenes/levels/level.tscn" id="1_1bbdw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gy01a"]
+size = Vector2(97, 4009)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r7qys"]
+size = Vector2(96, 4004)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hkalp"]
+size = Vector2(1696, 97)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xbibw"]
+size = Vector2(576, 97)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhf3p"]
+size = Vector2(572, 97)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2cq8"]
+size = Vector2(1034, 170)
+
+[node name="FirstLevel" unique_id=1196016232 instance=ExtResource("1_1bbdw")]
+next_scene = 5
+
+[node name="BG" type="ColorRect" parent="." index="0" unique_id=87427856]
+offset_left = -1731.0
+offset_top = -7025.0
+offset_right = 1974.0
+offset_bottom = 1159.0
+color = Color(0.8795506, 0.8289535, 0.97421974, 1)
+
+[node name="Instructions" type="Node2D" parent="." index="1" unique_id=1423022994]
+
+[node name="Label" type="Label" parent="Instructions" index="0" unique_id=577883643]
+custom_minimum_size = Vector2(200, 0)
+offset_left = -638.0
+offset_top = -353.0
+offset_right = 642.0
+offset_bottom = -198.0
+theme_type_variation = &"LevelLabel"
+text = "A Simple Level:
+Just go up"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="Instructions" index="1" unique_id=593833942]
+custom_minimum_size = Vector2(200, 0)
+offset_left = -638.0
+offset_top = -1413.0
+offset_right = 642.0
+offset_bottom = -1258.0
+theme_type_variation = &"LevelLabel"
+text = "Try action button 
+to rotate"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="Instructions" index="2" unique_id=689807764]
+custom_minimum_size = Vector2(200, 0)
+offset_left = -638.0
+offset_top = -2361.0
+offset_right = 642.0
+offset_bottom = -2206.0
+theme_type_variation = &"LevelLabel"
+text = "And action 2 to 
+change colors"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label5" type="Label" parent="Instructions" index="3" unique_id=1478972755]
+custom_minimum_size = Vector2(200, 0)
+offset_left = -638.0
+offset_top = -3284.0
+offset_right = 642.0
+offset_bottom = -3050.0
+theme_type_variation = &"LevelLabel"
+text = "Go through the above gap
+And finish the level"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Walls" type="Node2D" parent="." index="2" unique_id=1098658304]
+
+[node name="WestWall" type="StaticBody2D" parent="Walls" index="0" unique_id=1479841458]
+position = Vector2(-800, 0)
+
+[node name="ColorRect" type="ColorRect" parent="Walls/WestWall" index="0" unique_id=1474295445]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -3767.0
+offset_right = 48.0
+offset_bottom = 244.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4014601, 0.40146014, 0.40146002, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WestWall" index="1" unique_id=1930363468]
+position = Vector2(0.5, -1764.5)
+shape = SubResource("RectangleShape2D_gy01a")
+
+[node name="EastWall" type="StaticBody2D" parent="Walls" index="1" unique_id=1457166684]
+position = Vector2(800, 0)
+
+[node name="ColorRect" type="ColorRect" parent="Walls/EastWall" index="0" unique_id=265425611]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -3772.0
+offset_right = 48.0
+offset_bottom = 216.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/EastWall" index="1" unique_id=827746085]
+position = Vector2(1, -1766)
+shape = SubResource("RectangleShape2D_r7qys")
+
+[node name="SouthWall" type="StaticBody2D" parent="Walls" index="2" unique_id=600746192]
+position = Vector2(0, 215)
+
+[node name="ColorRect" type="ColorRect" parent="Walls/SouthWall" index="0" unique_id=1779220862]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -849.0
+offset_top = -48.0
+offset_right = 848.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/SouthWall" index="1" unique_id=1429562575]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_hkalp")
+
+[node name="NWWall" type="StaticBody2D" parent="Walls" index="3" unique_id=596878649]
+position = Vector2(-443, -3815)
+
+[node name="ColorRect" type="ColorRect" parent="Walls/NWWall" index="0" unique_id=551993272]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -405.0
+offset_top = -48.0
+offset_right = 170.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.4, 0.4, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/NWWall" index="1" unique_id=267183815]
+position = Vector2(-117, -0.5)
+shape = SubResource("RectangleShape2D_xbibw")
+
+[node name="NEWall" type="StaticBody2D" parent="Walls" index="4" unique_id=942317555]
+position = Vector2(681, -3815)
+
+[node name="ColorRect" type="ColorRect" parent="Walls/NEWall" index="0" unique_id=1986986218]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -405.0
+offset_top = -48.0
+offset_right = 167.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.4, 0.4, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/NEWall" index="1" unique_id=365660205]
+position = Vector2(-118, -0.5)
+shape = SubResource("RectangleShape2D_qhf3p")
+
+[node name="CollisionShape2D" parent="FinishArea" parent_id_path=PackedInt32Array(1693427938) index="0" unique_id=1119043868]
+position = Vector2(-3226, -3894)
+shape = SubResource("RectangleShape2D_b2cq8")
+debug_color = Color(0.3314348, 0.33579907, 0.92516476, 0.41960785)

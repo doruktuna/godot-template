@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://de64e8chgm8li"]
+
+[ext_resource type="PackedScene" uid="uid://dp8cc1v5hx4nq" path="res://ui/menus/pause_menu.tscn" id="1_377w7"]
+[ext_resource type="Script" uid="uid://c5uof3254b8cf" path="res://scenes/levels/level.gd" id="1_bovvr"]
+[ext_resource type="PackedScene" uid="uid://bvcmylbm4efj1" path="res://entities/player/player.tscn" id="2_b2cq8"]
+
+[node name="Level" type="Node2D" unique_id=1196016232]
+script = ExtResource("1_bovvr")
+
+[node name="Player" parent="." unique_id=595098128 instance=ExtResource("2_b2cq8")]
+
+[node name="FinishArea" type="Area2D" parent="." unique_id=1693427938]
+unique_name_in_owner = true
+position = Vector2(3223, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishArea" unique_id=1119043868]
+debug_color = Color(0.3335298, 0.6056067, 0.42073593, 0.41960785)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=729607687]
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=739617311 instance=ExtResource("1_377w7")]
+visible = false
