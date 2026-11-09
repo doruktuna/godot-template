@@ -5,7 +5,6 @@ extends CanvasLayer
 @onready var ss_texture_rect: TextureRect = %SSTextureRect
 
 @onready var restart_button: Button = %RestartButton
-@onready var previous_level_button: Button = %PreviousLevelButton
 @onready var next_level_button: Button = %NextLevelButton
 @onready var main_menu_button: Button = %MainMenuButton
 @onready var quit_button: Button = %QuitButton
